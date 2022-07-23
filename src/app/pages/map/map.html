@@ -1,0 +1,60 @@
+<ion-header no-border no-shadow mode="ios">
+  <ion-toolbar color="dark" fixed>
+    <ion-buttons slot="start">
+      <ion-back-button text="{{'BACK'|translate}}"></ion-back-button>
+    </ion-buttons>
+    <ion-searchbar mode="ios" debounce="600" [placeholder]="'ENTER_ADDRESS' | translate"
+      (ionInput)="onSearchAddress($event)" cancelText="Kapat">
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content no-bounce [attr.style]="ionContentStylePadding">
+  <ion-grid class="fullscreen" no-padding fixed>
+    <ion-row class="fullscreen" justify-content-center>
+      <ion-col size-xs="12" size-lg="12">
+        <div #map class="map"></div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-card color="light" mode="ios" *ngIf="isOpen" [routerLink]="'./'+place.id">
+    <ion-card-content>
+      <ion-label>
+        <ion-text color="dark">
+          <h2 class="bold no-margin ellipsis">
+            {{ place.title }}
+          </h2>
+        </ion-text>
+        <ion-text color="medium">
+          <p class="bold no-margin">
+            {{ place.category.title | translate}}
+          </p>
+        </ion-text>
+        <div>
+          <ion-progress-bar *ngIf="place.rating > 0 && place.rating < 2" color="danger" [value]="(place.rating)/5">
+          </ion-progress-bar>
+          <ion-progress-bar *ngIf="place.rating >= 2 && place.rating < 4" color="primary" [value]="(place.rating)/5">
+          </ion-progress-bar>
+          <ion-progress-bar *ngIf="place.rating >= 4" color="success" [value]="(place.rating)/5"></ion-progress-bar>
+          <span *ngIf="place.rating != 0" class="rating">{{((place.rating)/5)*100}} % {{ 'LIKED' | translate }}</span>
+        </div>
+      </ion-label>
+  
+      <div slot="end">
+        <ion-text color="secondary">
+          <div class="status">
+            <span *ngIf="place.rating > 0 && place.rating < 2" style="color: #ffffff; background-color: #eb445a">{{ 'BAD'
+              | translate }}</span>
+            <span *ngIf="place.rating >= 2 && place.rating < 4" style="color: #ffffff; background-color: #3880ff">{{
+              'GOOD' | translate }}</span>
+            <span *ngIf="place.rating >= 4" style="color: #ffffff; background-color: #2dd36f">{{ 'VERY_GOOD' | translate
+              }}</span>
+          </div>
+        </ion-text>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-footer>

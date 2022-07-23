@@ -1,0 +1,25 @@
+<ion-header no-border no-shadow mode="ios">
+  <ion-toolbar color="dark" fixed>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="return-up-back-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ 'EMERGENCY' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #container scrollEvents="true">
+<ion-grid fixed>
+  <div class="ozet">        
+    <p><strong>{{ '112_TITLE' | translate }}:</strong> {{ '112_DESC' | translate }}</p>
+
+    <p><strong>{{ '110_TITLE' | translate }}:</strong> {{ '110_DESC' | translate }}</p>
+
+    <p><strong>{{ '155_TITLE' | translate }}:</strong> {{ '155_DESC' | translate }}</p>
+
+    <p><strong>{{ '156_TITLE' | translate }}:</strong> {{ '156_DESC' | translate }}</p>
+
+    </div>
+</ion-grid>
+</ion-content>

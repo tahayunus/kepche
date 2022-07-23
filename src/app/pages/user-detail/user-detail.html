@@ -1,0 +1,136 @@
+<ion-header fixed class="mainHeader">
+  <ion-toolbar mode="md" color="light" fixed>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      <a routerLink="/">
+        <img class="logo" src="./assets/img/pigeon.svg" />
+        <img class="logo" src="./assets/img/logo_.png" />
+      </a>
+    </ion-title>
+    <ion-buttons slot="end">
+
+      <ion-button (click)="openSignInModal()" layout="icon-start" *ngIf="platform.is('mobile') && !user">
+        <ion-icon name="log-in-outline"></ion-icon>
+      </ion-button>
+
+      <ion-button fill="clear" color="dark" [routerLink]="['./../../search']">
+        <ion-icon name="search-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid fixed class="p96">
+    <ion-row class="ion-justify-content-center">
+      <ion-col class="ion-no-padding" size-xs="12" size-sm size-md size-lg="8">
+        <div>
+          <ion-row class="ion-padding">
+            <ion-card mode="ios" class="heading ion-no-margin" style="width: 100%;">
+              <ion-row>
+                <ion-col size-xs="4" size-sm="4" size-md="4" size-lg="4">
+                  <ion-avatar>
+                    <img src-fallback="./assets/img/avatar.png" [src]="profile?.attributes.photo?.url()" />
+                  </ion-avatar>
+                </ion-col>
+                <ion-col size-xs="8" size-sm="8" size-md="8" size-lg="8">
+                  <div color="secondary" class="ion-text-center">
+                    <h4 class="bold">{{ profile?.attributes.name }} {{ profile?.attributes.surname }}</h4>
+                    <ion-button *ngIf="!uFollow" class="" (click)="follow()" shape="round" fill="outline" color="light" size="small">
+                      {{'TO_FOLLOW' | translate}}
+                    </ion-button>
+                    <ion-button *ngIf="uFollow" shape="round" (click)="unfollow()" color="light" size="small">
+                      {{'YOU_FOLLOWING' | translate}}
+                    </ion-button>
+                    <p *ngIf="!isFollowYou">{{'NOT_FOLLOWING_YOU'|translate}}</p>
+                  </div>
+                </ion-col>
+              </ion-row>
+              <ion-button margin-top shape="round" color="light" (click)="openSignInModal()" *ngIf="!user">
+                {{ 'LOGIN' | translate }}
+              </ion-button>
+            </ion-card>
+            <ion-card mode="ios" fixed style="width: 100%;" class="ion-no-margin ion-margin-top">
+              <ion-row class="ion-justify-content-center">
+                <ion-col size-xs="4" size-sm="4" size-md="4" size-lg="4" class="ion-text-center">
+                  <ion-text color="secondary" class="ion-text-center">
+                    <div class="bold">{{totalPhotos}}</div>
+                    <span>{{ 'SHARING' | translate }}</span>
+                  </ion-text>
+                </ion-col>
+                <ion-col size-xs="4" size-sm="4" size-md="4" size-lg="4" class="ion-text-center">
+                  <ion-text color="secondary" class="ion-text-center" (click)="openFollowers(profile?.id,1)">
+                    <div class="bold">{{followers.length}}</div>
+                    <span>{{ 'FOLLOWERS' | translate }}</span>
+                  </ion-text>
+                </ion-col>
+                <ion-col size-xs="4" size-sm="4" size-md="4" size-lg="4" class="ion-text-center">
+                  <ion-text color="secondary" class="ion-text-center" (click)="openFollowers(profile?.id,2)">
+                    <div class="bold">{{following.length}}</div>
+                    <span>{{ 'FOLLOWING' | translate }}</span>
+                  </ion-text>
+                </ion-col>
+              </ion-row>
+            </ion-card>
+          </ion-row>
+
+          <ion-grid fixed>
+            <ion-row *ngFor="let photo of photos;let i = index">
+              <span class="ion-padding">
+                <ion-avatar style="height: 48px; width: 48px;">
+                  <img [src]="photo?.place.attributes.image.url()" height="32" />
+                </ion-avatar>
+              </span>
+              <ion-text color="dark" class="ion-text-start ion-padding-bottom ion-padding-top">
+                <span style="line-height: 24px;">
+                  <div class="bold" [routerLink]="['./../places/'+photo?.place.id]">{{ photo?.place.attributes.title }}</div>
+                  <span class="text-medium bold">{{photo.createdAt | date:'dd'}} {{'MONTH'+[photo.createdAt | date:'MM']
+                    | translate}} {{photo.createdAt | date:'yyyy HH:mm'}}</span>
+                </span>
+              </ion-text>
+              <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" class="ion-no-padding">
+                <img [src]="photo.image.url()" />
+              </ion-col>
+              <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" class="ion-no-padding">
+                <ion-toolbar>
+                  <ion-buttons slot="start">
+                    <ion-button (click)="likeButton(photo.id,photo.like,isliked[i],i)">
+                      <ion-icon *ngIf="isliked[i]" name="flame" color="warning" slot="icon-only"></ion-icon>
+                      <ion-icon *ngIf="!isliked[i]" name="flame-outline" color="dark" slot="icon-only"></ion-icon>
+                    </ion-button>
+                    <ion-button (click)="onComment(photo)">
+                      <ion-icon name="chatbubbles-outline" color="dark" slot="icon-only"></ion-icon>
+                    </ion-button>
+                    <ion-button>
+                      <ion-icon color="dark" name="arrow-redo-outline" slot="icon-only"></ion-icon>
+                    </ion-button>
+                  </ion-buttons>
+                  <ion-buttons slot="end">
+                    <ion-button>
+                      <ion-icon name="bookmark-outline" color="dark" slot="icon-only"></ion-icon>
+                    </ion-button>
+                  </ion-buttons>
+                </ion-toolbar>
+              </ion-col>
+              <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" class="ion-no-padding ion-padding-start">
+                <span style="line-height: 24px;">
+                  <div class="bold">
+                    <p class="ion-no-margin">{{photo?.like.length}} Beğeni</p>
+                    <p class="ion-no-margin">{{photo?.attributes.comment.length}} yorumun tümünü gör</p>
+
+                  </div>
+                </span>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+        </div>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<app-footer></app-footer>

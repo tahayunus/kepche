@@ -1,0 +1,132 @@
+ion-slides {
+  height: auto;
+
+  .bg-img {
+    background-size: cover;
+    background-position: center;
+    height: 150px;
+    width: 150px;
+  }
+
+  .swiper-pagination-bullet-active {
+    background: var(--ion-color-light);
+  }
+}
+
+ion-avatar {
+  margin: 0 12px 0 0 !important;
+
+  img {
+    background: var(--ion-color-dark);
+  }
+}
+
+ion-thumbnail {
+  --border-radius: 6px;
+  width: 80px;
+  height: 80px;
+}
+
+ion-list {
+  background: var(--ion-color-light);
+}
+
+ion-item {
+  --padding-start: 0;
+  ion-label {
+    overflow: inherit;
+  }
+}
+
+ion-slides {
+
+  padding:10px;
+  --bullet-background: var(--ion-color-light);
+  --bullet-background-active: var(--ion-color-primary);
+
+  ion-slide img {
+      display: block;
+      width: 100%;
+  }
+
+  .slide-img {
+      background-color: var(--ion-color-white);
+      background-size: cover;
+      background-position: center;
+      border-radius: 15px;
+      width: 100%;
+      height: 200px;
+  }
+}
+ion-row[nowrap] {
+  overflow: hidden;
+}
+
+.flex-start {
+  display: flex;
+  align-items: flex-start;
+}
+
+.review-count {
+  margin-left: 6px;
+}
+
+.icon-share {
+  font-size: 48px;
+}
+
+.skeleton-item {
+  width: auto;
+  height: auto;
+  margin: 10px auto;
+  padding: 10px;
+
+  .wrapper {
+    display: inline-flex;
+    width: 100%;
+    height: auto;
+    flex: 1;
+
+    .avatar {
+      width: 100px;
+      height: 90px;
+    }
+
+    .title {
+      width: 100%;
+      padding: 10px;
+      height: 80px;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  ion-thumbnail {
+    width: 100px;
+    height: 100px;
+  }
+}
+.rating {
+  top: 8px;
+  position: relative;
+  line-height: 10px;
+  background: white;
+  padding: 5px;
+  border-radius: 3px;
+  font-size: small;
+  font-weight: bolder;
+  float: left;
+}
+.status {
+  span {
+    top: 8px;
+    left: 8px;
+      position: relative;
+      line-height: 10px;
+      padding: 5px;
+      border-radius: 3px;
+      font-size: small;
+      font-weight: bolder; 
+      float: left;
+  }
+}

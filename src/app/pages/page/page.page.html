@@ -1,0 +1,29 @@
+<ion-header no-border no-shadow mode="ios">
+  <ion-toolbar color="dark" fixed>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="return-up-back-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      {{page?.attributes.title | translate}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content #containerfluid>
+  <ion-grid fixed>
+    <ion-row justify-content-center>
+      <ion-col size-xs="12" size-lg="12">
+        <div class="fade-in">
+          <div margin-top>
+            <h3 class="bold">{{page?.attributes.title | translate}}</h3>
+          </div>
+        </div>           
+        <div class="html-content" *ngIf="htmlBody"
+          (click)="onContentTouched($event)"
+          [innerHTML]="htmlBody">
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

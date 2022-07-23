@@ -1,0 +1,15 @@
+
+
+ion-avatar {
+    width: 96px;
+    height: 96px;
+    img {
+      background: var(--ion-color-light);
+      display: inline-block;
+      max-width: 96px;
+      max-height: 96px;
+      border-radius: 50%;
+      border: 2px solid var(--ion-color-dark);
+      padding: 2px;
+    }
+  }

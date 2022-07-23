@@ -1,0 +1,50 @@
+<ion-header no-border no-shadow mode="ios">
+  <ion-toolbar mode="ios" color="dark" fixed>
+    <ion-buttons slot="start">
+      <ion-back-button text="{{'BACK' | translate}}"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'HELP' | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col no-padding size-xs="12" size-sm size-md size-lg="12">
+        <ion-card mode="ios">
+          <ion-list no-padding no-margin>
+            <ion-item lines="none" color="light" [routerLink]="['../pharmacy-duty']">
+              <ion-icon name="medkit-outline" slot="start" color="secondary"></ion-icon>
+              <ion-label>
+                <p class="bold link text-slarge">{{ 'PHARMACY_ON_DUTY' | translate }}</p>
+              </ion-label>
+              <ion-icon name="chevron-forward-outline" slot="end" color="dark"></ion-icon>
+            </ion-item>
+            <ion-item lines="none" color="light" [routerLink]="['../call-taxi']">
+              <ion-icon name="car-outline" slot="start" color="secondary"></ion-icon>
+              <ion-label>
+                <p class="bold link text-slarge">{{ 'CALL_TAXI' | translate }}</p>
+              </ion-label>
+              <ion-icon name="chevron-forward-outline" slot="end" color="dark"></ion-icon>
+            </ion-item>
+            <!--
+            <ion-item lines="none" color="light" [routerLink]="['./bus-time']">
+              <ion-icon name="bus-outline" slot="start" color="secondary"></ion-icon>
+              <ion-label>
+                <p class="bold link text-slarge">{{ 'BUS_TIME' | translate }}</p>
+              </ion-label>
+              <ion-icon name="chevron-forward-outline" slot="end" color="dark"></ion-icon>
+            </ion-item>-->
+            <ion-item lines="none" color="light" [routerLink]="['../emergency']">
+              <ion-icon name="warning-outline" slot="start" color="secondary"></ion-icon>
+              <ion-label>
+                <p class="bold link text-slarge">{{ 'EMERGENCY' | translate }}</p>
+              </ion-label>
+              <ion-icon name="chevron-forward-outline" slot="end" color="dark"></ion-icon>
+            </ion-item>
+          </ion-list>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

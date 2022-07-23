@@ -1,0 +1,43 @@
+ion-thumbnail {
+    min-width: 60px !important;
+    min-height: 60px !important;
+
+    img {
+        border-radius: 4px;
+        width: 60px !important;
+        height: 60px !important;
+    }
+}
+ion-label {
+    overflow: inherit !important;
+}
+.rating {
+    top: 8px;
+    position: relative;
+    line-height: 10px;
+    background: white;
+    padding: 5px 0;
+    border-radius: 3px;
+    font-size: small;
+    font-weight: bolder;
+    float: left;
+  }
+  .status {
+    span {
+      top: 8px;
+        position: relative;
+        line-height: 10px;
+        padding: 5px;
+        border-radius: 3px;
+        font-size: small;
+        font-weight: bolder; 
+        float: left;
+    }
+  }
+  
+.mapCard {
+  background: none;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}

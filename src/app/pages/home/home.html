@@ -1,0 +1,188 @@
+<app-header></app-header>
+<ion-content #container scrollEvents="true">
+  <ion-refresher slot="fixed" (ionRefresh)="onReload($event)">
+    <ion-refresher-content pullingText="{{ 'PULL_TO_REFRESH' | translate }}"
+      refreshingText="{{ 'REFRESHING' | translate }}">
+    </ion-refresher-content>
+  </ion-refresher>
+  <empty-view *ngIf="isErrorViewVisible" icon="alert" [text]="'ERROR_NETWORK' | translate">
+  </empty-view>
+  <ion-grid fixed class="p96 ion-no-padding">
+
+    <section *ngIf="isContentViewVisible">
+      <!--<ion-grid>
+        <div>
+          <ion-row (scroll)="onScroll()" class="scrollable">
+            <ion-col size-xs="3" size-sm="3" size-md="2" *ngFor="let story of stories; let i = index" class="cacaca">
+              <div class="story" text-center (click)="openStoryModal(story.storyImage?.url())">
+                <img [src]="story.storyImage?.url()" />
+              </div>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-grid>-->
+      <!-- Top Slide List -->
+      <div>
+        <ion-slides pager="true" (ionSlidesDidLoad)="onSlidesTopDidLoad($event)"
+          (ionSlideWillChange)="onSlidesTopWillChange($event)" [options]="slideOpts">
+          <ion-slide *ngFor="let slide of slides" (click)="onSlideTouched(slide)">
+            <div class="slide-img fade-in" defaultImage="./assets/img/placeholder.png" [lazyLoad]="slide.image?.url()"
+              [scrollObservable]="loadAndScroll">
+            </div>
+          </ion-slide>
+        </ion-slides>
+      </div>
+      <!-- Category List -->
+      <ion-grid class="ion-margin-bottom">
+        <ion-row>
+          <ion-col size-xs="6" size-sm="3" size-md="3" *ngFor="let category of categories;">
+            <ion-card mode="ios" button class="margin-zero" color="white" [routerLink]="['./places']"
+              [queryParams]="{ category: category.id }">
+              <img defaultImage="./assets/img/placeholder.png" [scrollObservable]="loadAndScroll"
+                [lazyLoad]="category.image?.url()" />
+              <ion-card-content class="ion-text-center ion-text-nowrap">
+                <p class="text-large bold ellipsis link">{{ category.title | translate }}</p>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <section>
+        <div class="ion-margin-bottom">
+          <ion-row (scroll)="onScroll()" class="scrollable ion-padding-start">
+            <ion-col size-xs="8" size-sm="6" size-md="3" *ngFor="let banner of banners">
+              <ion-card class="ion-no-margin ion-margin-bottom" mode="ios" (click)="onSlideTouched(banner)">
+                <img [src]="banner.image._url" />
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </div>
+      </section>
+      <!-- Featured Places -->
+      <section *ngIf="featuredPlaces.length">
+        <ion-row class="ion-align-items-center">
+          <ion-col size="6" class="ion-text-start">
+            <ion-text color="medium">
+              <span class="text-normal bold padding-small">
+                {{ 'FEATURED' | translate }}
+              </span>
+            </ion-text>
+          </ion-col>
+          <ion-col size="6" class="ion-text-end">
+            <ion-button class="ion-no-margin ion-text-capitalize" fill="clear" color="secondary"
+              [queryParams]="{featured:'1'}" [routerLink]="['../places']">
+              <span class="link text-normal">
+                {{ 'VIEW_ALL' | translate }}
+              </span>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <div class="ion-margin-bottom">
+          <ion-row (scroll)="onScroll()" class="scrollable ion-padding-start">
+            <ion-col size-xs="5" size-sm="4" size-md="3" *ngFor="let place of featuredPlaces">
+              <app-place-card [routerLink]="['../places/' + place.id + '/' + place.slug]" [place]="place"
+                [extraParams]="{ location: location, unit: preference.unit }" [scrollObservable]="loadAndScroll">
+              </app-place-card>
+            </ion-col>
+          </ion-row>
+        </div>
+      </section>
+      <!-- New Places -->
+      <section *ngIf="newPlaces.length">
+        <ion-row class="ion-padding-start ion-align-items-center">
+          <ion-col size="6" class="ion-text-start">
+            <ion-text color="medium">
+              <span class="text-normal bold padding-small">
+                {{ 'NEW' | translate }}
+              </span>
+            </ion-text>
+          </ion-col>
+          <ion-col size="6" class="ion-text-end">
+            <ion-button class="ion-margin-bottom ion-text-capitalize" fill="clear" color="secondary"
+              [routerLink]="['../places']">
+              <span class="link text-normal">
+                {{ 'VIEW_ALL' | translate }}
+              </span>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <div class="ion-margin-bottom">
+          <ion-row (scroll)="onScroll()" class="scrollable ion-padding-start">
+            <ion-col size-xs="5" size-sm="4" size-md="3" *ngFor="let place of newPlaces">
+              <app-place-card [routerLink]="['../places/' + place.id + '/' + place.slug]" [place]="place"
+                [extraParams]="{ location: location, unit: preference.unit }" [scrollObservable]="loadAndScroll">
+              </app-place-card>
+            </ion-col>
+          </ion-row>
+        </div>
+      </section>
+      <!-- Nearby Places -->
+      <section *ngIf="nearbyPlaces.length">
+        <ion-row class="ion-padding-start ion-align-items-center">
+          <ion-col size="6" class="ion-text-start">
+            <ion-text color="medium">
+              <span class="text-normal bold padding-small">
+                {{ 'NEARBY' | translate }}
+              </span>
+            </ion-text>
+          </ion-col>
+          <ion-col size="6" class="ion-text-end">
+            <ion-button class="ion-no-margin ion-text-capitalize" fill="clear" color="secondary"
+              [queryParams]="{nearby:'1'}" [routerLink]="['../places']">
+              <span class="link text-normal">
+                {{ 'VIEW_ALL' | translate }}
+              </span>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <div class="ion-margin-bottom">
+          <ion-row class="ion-padding-start scrollable" (scroll)="onScroll()">
+            <ion-col size-xs="5" size-sm="4" size-md="3" *ngFor="let place of nearbyPlaces">
+              <app-place-card [routerLink]="['../places/' + place.id + '/' + place.slug]" [place]="place"
+                [extraParams]="{ location: location, unit: preference.unit }" [scrollObservable]="loadAndScroll">
+              </app-place-card>
+            </ion-col>
+          </ion-row>
+        </div>
+      </section>
+    </section>
+    <section *ngIf="isLoadingViewVisible">
+      <div>
+        <ngx-skeleton-loader count="1" appearance="circle"
+          [theme]="{ width: '100%', height: '250px', 'border-radius': '4px' }">
+        </ngx-skeleton-loader>
+      </div>
+      <ion-row nowrap>
+        <ion-col size-xs="4" size-sm="6" size-md="6" size-lg="2" *ngFor="let item of skeletonArray">
+          <ngx-skeleton-loader count="1" appearance="circle"
+            [theme]="{ width: '100%', height: '75px', 'border-radius': '4px' }">
+          </ngx-skeleton-loader>
+        </ion-col>
+      </ion-row>
+      <ion-row nowrap>
+        <ion-col size-xs="6" size-sm="6" size-md="6" size-lg="3" *ngFor="let item of skeletonArray">
+          <ngx-skeleton-loader count="1" appearance="circle"
+            [theme]="{ width: '100%', height: '150px', 'border-radius': '4px' }">
+          </ngx-skeleton-loader>
+        </ion-col>
+      </ion-row>
+      <ion-row nowrap>
+        <ion-col size-xs="6" size-sm="6" size-md="6" size-lg="3" *ngFor="let item of skeletonArray">
+          <ngx-skeleton-loader count="1" appearance="circle"
+            [theme]="{ width: '100%', height: '150px', 'border-radius': '4px' }">
+          </ngx-skeleton-loader>
+        </ion-col>
+      </ion-row>
+      <ion-row nowrap>
+        <ion-col size-xs="6" size-sm="6" size-md="6" size-lg="3" *ngFor="let item of skeletonArray">
+          <ngx-skeleton-loader count="1" appearance="circle"
+            [theme]="{ width: '100%', height: '150px', 'border-radius': '4px' }">
+          </ngx-skeleton-loader>
+        </ion-col>
+      </ion-row>
+    </section>
+    <ion-infinite-scroll *ngIf="isContentViewVisible" (ionInfinite)="onLoadMore($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-grid>
+</ion-content>

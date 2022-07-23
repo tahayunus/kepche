@@ -1,0 +1,22 @@
+<ion-header fixed class="mainHeader">
+  <ion-toolbar mode="md" color="light" fixed>
+    <ion-title *ngIf="!selectedAddress">
+      <ion-item lines="none" [routerLink]="['./address']">
+        <ion-icon slot="start" name="location-outline" color="light"></ion-icon>
+        <ion-label>{{'SELECT_ADDRESS' | translate}}</ion-label>
+      </ion-item>
+    </ion-title>
+    <ion-title *ngIf="selectedAddress">
+      <ion-item lines="none" [routerLink]="['./address']">
+        <ion-icon slot="start" name="location-outline" color="light"></ion-icon>
+        <ion-label>{{selectedAddress.value}}</ion-label>
+      </ion-item>
+    </ion-title>
+    <ion-buttons slot="end">      
+      <ion-button fill="clear" color="dark" [routerLink]="['./../../search']">
+        <ion-icon name="search-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>

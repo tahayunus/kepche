@@ -1,0 +1,62 @@
+<ion-header no-border>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="onDismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      {{ 'CHECK_IN' | translate }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="6" *ngFor="let st of status">
+        <ion-item (click)="selectEmoji(st.title)" class="feel" lines="none"
+          [ngClass]="selectedEmoji === st.title ? 'borderDark' : ''">
+          <ion-label color="dark">{{st.title | translate}}</ion-label>
+          <img slot="start" [src]="'assets/feel/'+st.title+'.png'" width="24" height="24" />
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid fixed>
+    <ion-row>
+      <div class="scrollable">
+        <app-upload-box [text]="'FEATURED_IMAGE' | translate" (onFileUploaded)="onMainFileUploaded($event)">
+        </app-upload-box>
+        <app-upload-box *ngFor="let upload of uploads" (onFileUploaded)="onFileUploaded($event, upload)">
+        </app-upload-box>
+        <div class="plusImage" (click)="plusImages(uploads.length)">
+          <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
+            <title>Add Circle</title>
+            <path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none"
+              stroke="currentColor" stroke-miterlimit="10" stroke-width="32" />
+            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"
+              d="M256 176v160M336 256H176" />
+          </svg>
+        </div>
+      </div>
+    </ion-row>
+  </ion-grid>
+  <div class="ion-text-center">
+    <ion-item class="ion-margin-vertical" lines="none" class="radius" color="light">
+      <ion-textarea [(ngModel)]="photo.description" rows="8" [placeholder]="'COMMENT' | translate"
+        (keyup.enter)="onSubmit()"></ion-textarea>
+    </ion-item>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="ion-text-center">
+      <ion-button shape="round" color="secondary" [disabled]="isLoadingViewVisible" (click)="onSubmit()">
+        <ion-spinner *ngIf="isLoadingViewVisible"></ion-spinner>
+        <span *ngIf="!isLoadingViewVisible">{{ 'SUBMIT' | translate }}</span>
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

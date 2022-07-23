@@ -1,0 +1,51 @@
+<ion-content class="ion-padding">
+  <ion-grid class="ion-text-center">
+    <ion-icon (click)="onDismiss()" name="chevron-down-outline"></ion-icon>
+  </ion-grid>
+  <ion-grid class="ion-fixed">
+    <ion-row>
+      <ion-col size="4">
+        <ion-avatar>
+          <img src-fallback="./assets/img/avatar.png" [src]="place?.image._url" />
+        </ion-avatar>
+      </ion-col>
+      <ion-col size="8">
+        <p class="text-large"><b>{{(place.title.length>20)? (place.title | slice:0:20)+'...':(place.title)}}</b></p>
+        <p class="text-medium">
+          <ion-text color="medium">
+            <span class="bold">{{ place.category?.title | translate}} > {{ place.secondcategory?.title |
+              translate}}</span>
+          </ion-text>
+        </p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid class="ion-fixed">
+    <ion-row>
+      <ion-col size="12">
+        <p *ngIf="place?.address"><b>{{ place?.address }}</b></p>
+        <p *ngIf="place?.phone" color="primary"><b>{{ place?.phone }}</b></p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid class="ion-fixed">
+    <ion-row>
+      <ion-col size="3">
+        <ion-button color="light" shape="round" expand="block" (click)="onLike()">
+          <ion-icon [name]="isLiked ? 'heart' : 'heart-outline'"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="3">
+        <ion-button color="light" shape="round" expand="block"
+          (click)="onDirectionsButtonTouched(place.location._latitude,place.location._latitude)">
+          <ion-icon name="navigate-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button color="primary" shape="round" expand="block" (click)="goPlace(place?.id)">
+          <ion-label><b>{{'DETAIL' | translate}}</b></ion-label>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

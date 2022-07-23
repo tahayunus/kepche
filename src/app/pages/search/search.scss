@@ -1,0 +1,58 @@
+.userList {
+    .userDetail {
+        height: 68px;
+        ion-row {
+            width: 100%;
+            .image {
+                img {
+                    width: 48px;
+                    height: 48px;
+                    border-radius: 50%;
+                }
+            }
+            .title {
+                line-height: 24px;
+                div {
+                    width: 100%;
+                }
+            }
+            .btn {
+                line-height: 48px;
+            }
+        }
+    }
+}
+
+.scrollable {
+    app-place-card {
+
+        --image-width: 100%;
+        --image-height: 130px;
+
+        --content-padding: 6px;
+    }
+}
+.placeList {
+    .placeDetail {
+        height: 68px;
+        ion-row {
+            width: 100%;
+            .image {
+                img {
+                    width: 48px;
+                    height: 48px;
+                    border-radius: 50%;
+                }
+            }
+            .title {
+                line-height: 24px;
+                div {
+                    width: 100%;
+                }
+            }
+            .btn {
+                line-height: 48px;
+            }
+        }
+    }
+}

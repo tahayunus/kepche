@@ -1,0 +1,51 @@
+.dsf {
+    height: 64px;
+    background: linear-gradient(0deg, rgba(0,0,0,1) 100%, rgba(0,0,0,0.30) 10%);;
+    position: fixed;
+    line-height: 64px;
+    width: 100%;
+    float: right;
+    ion-button {
+        height: 64px;
+        line-height: 64px;
+    }
+}
+.vertical-center {
+    display: flex !important;
+    align-content: center !important;
+    align-items: center !important;
+    vertical-align: middle !important;
+    width: 100%;
+    height: 100%;
+    .center {
+        display: flex !important;
+        align-content: center !important;
+        align-items: center !important;
+        vertical-align: middle !important;
+        width: 100%;
+        height: 100%;
+        .storyLeft {
+            position: absolute;
+            height: 100%;
+            width: 50px;
+            left: 0;
+            background-color: #f00;
+        }
+        .storyRight {
+            position: absolute;
+            height: 100%;
+            width: 50px;
+            right: 0;
+            background-color: aqua;
+        }
+        img {
+            vertical-align: middle;
+            background-color: var(--ion-color-white);
+            background-size: cover;
+            background-position: center;
+            border-radius: 0;
+            width: 100%;
+            height: auto;
+        }
+    }
+}

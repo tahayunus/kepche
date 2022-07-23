@@ -1,0 +1,37 @@
+<ion-header no-border no-shadow mode="ios">
+  <ion-toolbar color="dark" fixed>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="return-up-back-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ 'SELECT_ADDRESS' | translate }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['./add']">
+        <ion-icon name="add-circle-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #container scrollEvents="true">
+  <ion-grid fixed>
+    
+    <ion-row class="ion-align-items-center">
+      <ion-col size="6" class="ion-text-start">
+        <ion-text color="medium">
+          <span class="text-normal bold padding-small">
+            {{ 'MY_ADDRESS' | translate }}
+          </span>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-list>
+      <ion-radio-group allowEmptySelection="false" [value]="preference.address" (ionChange)="selectAddress($event)"></ion-radio-group>
+      <ion-item color="light" lines="none" *ngFor="let a of address">
+        <ion-label class="text-large bold">{{a.name}}</ion-label>
+        <ion-radio [value]="a.name"></ion-radio>
+      </ion-item>
+    </ion-list>
+  </ion-grid>
+</ion-content>

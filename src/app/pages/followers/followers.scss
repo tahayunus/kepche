@@ -1,0 +1,16 @@
+.flw {
+    height: 84px;
+    ion-avatar {
+        height: 64px;
+        width: 64px;
+    }
+    .name {
+        div {
+            line-height: 32px;
+            width: 100%;
+        }
+    }
+    .btn {
+        line-height: 64px !important;
+    }
+}

@@ -1,0 +1,31 @@
+<ion-tabs mode="md">
+    <div class="footer" *ngIf="platform.is('mobile')">
+        <ion-tab-bar slot="bottom" class="bottom-tab-bar" color="dark" *ngIf="platform.is('mobile')">
+            <ion-tab-button tab="home" layout="icon-center">
+                <ion-icon name="home"></ion-icon>
+                <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+            </ion-tab-button>
+
+            <ion-tab-button tab="places" layout="icon-center">
+                <ion-icon name="file-tray"></ion-icon>
+                <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+            </ion-tab-button>
+
+            <ion-tab-button tab="map" layout="icon-center">
+                <ion-icon name="map"></ion-icon>
+            </ion-tab-button>
+
+            <ion-tab-button tab="posts" layout="icon-center">
+                <ion-icon name="document-text"></ion-icon>
+                <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+            </ion-tab-button>
+
+            <ion-tab-button tab="profile" layout="icon-center">
+                <ion-icon name="person" *ngIf="!user"></ion-icon>
+                <img class="profileImg" *ngIf="user && user?.attributes.photo?.url() != null" [src]="user?.attributes.photo?.url()"/>
+                <img class="profileImg" *ngIf="user && user?.attributes.photo?.url() === null" src="assets/img/avatar.png"/>
+                <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+            </ion-tab-button>
+        </ion-tab-bar>
+    </div>
+</ion-tabs>

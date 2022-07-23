@@ -1,0 +1,16 @@
+ion-content {
+  --background: var(--ion-color-light-tint);
+}
+
+ion-fab {
+  left: 0;
+  right: 0;
+  margin: auto;
+  text-align: center;
+}
+ion-segment-button {
+  ion-label {
+    font-size: small;
+    font-weight: 800;
+  }
+}

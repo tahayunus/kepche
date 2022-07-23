@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "749471818212",
+    "project_id": "guvercinapp-316108",
+    "storage_bucket": "guvercinapp-316108.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:749471818212:android:081586425502020a7967f1",
+        "android_client_info": {
+          "package_name": "com.guvercinapp.tr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "749471818212-g8a17lb3pakuh108bccvv2st1a4f2jff.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2dTP6yMv1q9PkVU1r_fcnSOG5bAwcMls"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "749471818212-g8a17lb3pakuh108bccvv2st1a4f2jff.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "749471818212-qke41gl69s2rvekua6uvg01kkefslcfi.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.guvercinapp.tr"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

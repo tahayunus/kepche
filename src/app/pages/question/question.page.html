@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="secondary" fixed>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ 'QUESTIONS' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-label *ngIf="!question" position="stacked" color="medium">
+    <span class="bold">{{'NOT_FOUND_QUESTION'|translate}}</span>
+  </ion-label><form [formGroup]="form" #signUpForm="ngForm" (ngSubmit)="onSubmit()" #myForm="ngForm" novalidate>
+
+<ion-label position="stacked" color="medium">
+  <span class="bold">{{question?.title}}</span>
+</ion-label>
+<ion-item *ngIf="question?.type === 'select'"  margin-vertical lines="none" color="light">
+  <ion-icon slot="start" color="light" [color]="isFieldValid(form.controls.answer) ? 'secondary' : 'medium'"
+    [name]="isFieldValid(form.controls.answer) ? 'checkmark-circle' : 'close-circle'">
+  </ion-icon>
+  <ion-select [placeholder]="'PLEASE_SELECT'|translate" [okText]="'OK'|translate" [cancelText]="'CANCEL'|translate" formControlName="answer">
+    <ion-select-option *ngFor="let data of question.options;let indexOfelement=index;" [value]="data.title">{{data.title}}</ion-select-option>
+  </ion-select>
+</ion-item>
+<ion-item *ngIf="question?.type === 'text'"  margin-vertical lines="none" color="light">
+  <ion-icon slot="start" color="light" [color]="isFieldValid(form.controls.answer) ? 'secondary' : 'medium'"
+    [name]="isFieldValid(form.controls.answer) ? 'checkmark-circle' : 'close-circle'">
+  </ion-icon>
+  <ion-input [placeholder]="'PLEASE_INPUT'|translate" type="text" formControlName="answer"></ion-input>
+</ion-item>
+</form>
+</ion-content>
+<ion-footer *ngIf="question">
+  <ion-toolbar text-center>
+    <ion-button strong shape="round" color="secondary" [disabled]="isLoadingViewVisible"
+      (click)="myForm.ngSubmit.emit()">
+      <ion-spinner color="light" *ngIf="isLoadingViewVisible"></ion-spinner>
+      <span *ngIf="!isLoadingViewVisible">{{ 'SUBMIT' | translate }}</span>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,55 @@
+<ion-content>
+  <ion-slides pager [options]="slidesOptions">
+
+    <ion-slide class="slide-1">
+      <div class="img-wrapper">
+        <div class="caption">
+          <ion-text color="light">
+            <h2 class="slide-title bold">
+            </h2>
+          </ion-text>
+        </div>
+      </div>
+    </ion-slide>
+
+    <ion-slide class="slide-2">
+      <div class="img-wrapper">
+        <div class="caption">
+          <ion-text color="light">
+            <h2 class="slide-title bold">
+            </h2>
+          </ion-text>
+        </div>
+      </div>
+    </ion-slide>
+
+    <ion-slide class="slide-3">
+      <div class="img-wrapper">
+        <div class="caption">
+          <ion-text color="light">
+            <h2 class="slide-title bold">
+            </h2>
+          </ion-text>
+        </div>
+      </div>
+    </ion-slide>
+
+    <ion-slide class="slide-4">
+      <div class="img-wrapper">
+        <div class="caption">
+          <ion-text color="light">
+            <h2 class="slide-title bold">
+            </h2>
+          </ion-text>
+          <ion-button size="large" shape="round" color="light" (click)="skip()">
+            {{ "GET_STARTED" | translate }}
+            <ion-icon slot="end" name="arrow-forward"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+    </ion-slide>
+  </ion-slides>
+  <ion-button class="skip-button bold" fill="clear" expand="block" color="light" (click)="skip()">
+    {{ "SKIP" | translate }}
+  </ion-button>
+</ion-content>

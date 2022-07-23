@@ -1,0 +1,26 @@
+<ion-card mode="ios" class="shadow ion-no-margin ion-margin-bottom" [color]="color">
+  <div class="bg-img" offset="10" defaultImage="./assets/img/productholder1.png" [lazyLoad]="product.featuredImageUrl"
+    [scrollObservable]="scrollObservable">
+    <div class="status">
+      <span *ngIf="product.rating > 0 && product.rating < 2" style="color: #ffffff; background-color: #eb445a">{{ 'BAD' | translate }}</span>
+      <span *ngIf="product.rating >= 2 && product.rating < 4" style="color: #ffffff; background-color: #3880ff">{{ 'GOOD' | translate }}</span>
+      <span *ngIf="product.rating >= 4" style="color: #ffffff; background-color: #2dd36f">{{ 'VERY_GOOD' | translate }}</span>
+    </div>
+    <ion-progress-bar *ngIf="product.rating > 0 && product.rating < 2" color="danger" [value]="(product.rating)/5"></ion-progress-bar>
+    <ion-progress-bar *ngIf="product.rating >= 2 && product.rating < 4" color="primary" [value]="(product.rating)/5"></ion-progress-bar>
+    <ion-progress-bar *ngIf="product.rating >= 4" color="success" [value]="(product.rating)/5"></ion-progress-bar>
+    <span *ngIf="product.rating != 0" class="rating">{{ ((product.rating)/5)*100  | number : fractionSize }} %</span>
+  </div>
+  <ion-card-content>
+    <div class="ion-text-nowrap">
+      <ion-text color="secondary">
+        <h3 class="bold ellipsis">{{ product.title }}</h3>
+      </ion-text>
+      <p class="text-small bold">
+        <ion-text color="dark">
+          {{product.distance(extraParams.location, extraParams.unit)}}
+        </ion-text>
+      </p>
+    </div>
+  </ion-card-content>
+</ion-card>

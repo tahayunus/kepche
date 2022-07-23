@@ -1,0 +1,25 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="onDismiss()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-grid>
+  <ion-row>
+    <ion-col>      
+      <ion-row nowrap>
+        <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="4" *ngFor="let item of skeletonImages">
+          <ngx-skeleton-loader count="1" appearance="circle"
+            [theme]="{ width: '3000px', height: '300px', 'border-radius': '4px' }">
+          </ngx-skeleton-loader>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</ion-content>

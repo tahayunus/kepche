@@ -1,0 +1,14 @@
+<ion-header no-border>
+  <ion-toolbar mode="ios" color="dark">
+    <ion-title class="ion-text-center">{{ 'CITIES' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item color="light" lines="none" *ngFor="let c of cities" (click)="onChangeUnit(c.name)">
+      <ion-label class="text-large bold">{{c.name}}</ion-label>
+      <ion-radio [value]="c.name"></ion-radio>
+    </ion-item>
+  </ion-list>
+</ion-content>

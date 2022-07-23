@@ -1,0 +1,155 @@
+<ion-header>
+  <ion-toolbar color="dark" fixed>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="return-up-back-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-searchbar mode="ios" (ionChange)="onSearch($event)" [placeholder]="'SEARCH' | translate"
+      showCancelButton="focus" [cancelButtonText]="'CLOSE' | translate">
+    </ion-searchbar>
+  </ion-toolbar>
+  <ion-tab-bar slot="top" *ngIf="content === 'history' || content === 'search'">
+    <ion-tab-button (click)="changeType('all')">
+      <ion-label>Tümü</ion-label>
+    </ion-tab-button>
+    <ion-tab-button (click)="changeType('place')">
+      <ion-label>Mekan</ion-label>
+    </ion-tab-button>
+    <ion-tab-button (click)="changeType('user')">
+      <ion-label>Kişi</ion-label>
+    </ion-tab-button>
+    <ion-tab-button (click)="changeType('activity')">
+      <ion-label>Etkinlik</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-header>
+
+<ion-content #container scrollEvents="true" class="ion-no-padding">
+  <ion-grid fixed *ngIf="content === 'history'">
+    <div *ngIf="type === 'all' || type === 'user'" class="userList">
+      <div *ngFor="let u of usersLog; let i = index" class="userDetail">
+        <ion-row [routerLink]="['./../index/home/user/' + u.id]">
+          <ion-col size-xs="3" size-sm="3" class="image">
+            <img src-fallback="./assets/img/avatar.png" [src]="usersLog[i]?.photo?.url()" />
+          </ion-col>
+          <ion-col size-xs="8" size-sm="8" class="title">
+            <div><b>{{u.name}}</b></div>
+            <div>{{u.username}}</div>
+          </ion-col>
+          <ion-col size-xs="1" size-sm="1" class="btn">
+            <ion-icon name="close-outline" color="dark"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+    <div *ngIf="type === 'all' || type === 'place'" class="placeList">
+      <div *ngFor="let p of placesLog; let i = index" class="placeDetail">
+        <ion-row [routerLink]="['./../index/places/' + p.id]">
+          <ion-col size-xs="3" size-sm="3" class="image">
+            <img src-fallback="./assets/img/avatar.png" [src]="placesLog[i]?.image?.url()" />
+          </ion-col>
+          <ion-col size-xs="8" size-sm="8" class="title">
+            <div><b>{{p.title}}</b></div>
+            <div>{{p.category?.title | translate}} > {{p.secondcategory?.title | translate}}</div>
+          </ion-col>
+          <ion-col size-xs="1" size-sm="1" class="btn">
+            <ion-icon name="close-outline" color="dark"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+  </ion-grid>
+  <ion-grid fixed *ngIf="content === 'search'">
+    <ion-row *ngIf="isLoadingViewVisible">
+      <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4" *ngFor="let item of skeletonArray">
+        <ngx-skeleton-loader count="1" appearance="circle"
+          [theme]="{ width: '100%', height: '200px', 'border-radius': '0' }">
+        </ngx-skeleton-loader>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <p *ngIf="users.length>0">{{'USERS' | translate}}</p>
+      <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4" float-left *ngFor="let usr of users">
+        <ion-card (click)="userClick(usr.id)" [routerLink]="['../user/' + usr.id]" mode="ios">
+          <ion-row justify-content-center>
+            <ion-col size-xs="3" size-sm="3" size-md="3" size-lg="3">
+              <ion-avatar>
+                <img src-fallback="./assets/img/avatar.png" [src]="usr?.attributes.photo?.url()" />
+              </ion-avatar>
+            </ion-col>
+            <ion-col size-xs="3" size-sm="3" size-md="3" size-lg="3">
+              {{usr.username}}
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+      <p *ngIf="places.length>0">{{'PLACE' | translate}}</p>
+      <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4" float-left *ngFor="let place of places">
+        <app-place-card (click)="placeClick(place.id)" [routerLink]="['../index/places/' + place.id]" [place]="place"
+          [extraParams]="{ location: location, unit: preference.unit }" [scrollObservable]="loadAndScroll">
+        </app-place-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid fixed *ngIf="content === 'discover'">
+    <!-- Featured Places -->
+    <section *ngIf="likePlaces.length">
+      <ion-row class="ion-align-items-center">
+        <ion-col size="6" class="ion-text-start">
+          <ion-text color="medium">
+            <span class="text-normal bold padding-small">
+              {{ 'MY_FAVORITES' | translate }}
+            </span>
+          </ion-text>
+        </ion-col>
+        <ion-col size="6" class="ion-text-end">
+          <ion-button class="ion-no-margin ion-text-capitalize" fill="clear" color="secondary"
+            [queryParams]="{like:'1'}" [routerLink]="['../places']">
+            <span class="link text-normal">
+              {{ 'VIEW_ALL' | translate }}
+            </span>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <div class="ion-margin-bottom">
+        <ion-row (scroll)="onScroll()" class="scrollable ion-padding-start">
+          <ion-col size-xs="5" size-sm="4" size-md="3" *ngFor="let place of propertiesPlaces">
+            <app-place-card [routerLink]="['./../index/home/places/' + place.id]" [place]="place"
+              [extraParams]="{ location: location, unit: preference.unit }" [scrollObservable]="loadAndScroll">
+            </app-place-card>
+          </ion-col>
+        </ion-row>
+      </div>
+    </section>
+    <!-- Featured Places -->
+    <section *ngIf="likePlaces.length">
+      <ion-row class="ion-align-items-center">
+        <ion-col size="6" class="ion-text-start">
+          <ion-text color="medium">
+            <span class="text-normal bold padding-small">
+              {{ 'MY_FAVORITES' | translate }}
+            </span>
+          </ion-text>
+        </ion-col>
+        <ion-col size="6" class="ion-text-end">
+          <ion-button class="ion-no-margin ion-text-capitalize" fill="clear" color="secondary"
+            [queryParams]="{like:'1'}" [routerLink]="['../places']">
+            <span class="link text-normal">
+              {{ 'VIEW_ALL' | translate }}
+            </span>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <div class="ion-margin-bottom">
+        <ion-row (scroll)="onScroll()" class="scrollable ion-padding-start">
+          <ion-col size-xs="5" size-sm="4" size-md="3" *ngFor="let place of likePlaces">
+            <app-place-card [routerLink]="['./../index/home/places/' + place.id]" [place]="place"
+              [extraParams]="{ location: location, unit: preference.unit }" [scrollObservable]="loadAndScroll">
+            </app-place-card>
+          </ion-col>
+        </ion-row>
+      </div>
+    </section>
+  </ion-grid>
+</ion-content>

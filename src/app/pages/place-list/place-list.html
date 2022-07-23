@@ -1,0 +1,82 @@
+<app-header></app-header>
+<ion-content #container scrollEvents="true">
+  <ion-header class="ion-no-border ion-no-shadow" mode="ios">
+    <ion-toolbar mode="ios" color="dark" fixed>
+      <ion-buttons slot="start" *ngIf="params.category || params.featured || params.nearby">
+        <ion-button (click)="goBack()">
+          <ion-icon name="return-up-back-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>
+        <span *ngIf="params.featured">{{ 'FEATURED' | translate }}</span>
+        <span *ngIf="params.nearby">{{ 'NEARBY' | translate }}</span>
+        <span *ngIf="params.category">{{ params.category.title | translate}}</span>
+        <span *ngIf="!params.category && !params.featured && !params.nearby">
+          {{ 'NEW' | translate }}
+        </span>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="status-wrapper" style="margin-bottom: 20px;" *ngIf="params.category">
+    <ion-segment scrollable value="heart" color="dark">
+      <ion-segment-button style="padding-left: 5;" color="dark">
+        <ion-label (click)="clickEvent('all')">{{'ALL' | translate}}</ion-label>
+      </ion-segment-button>
+      <ion-segment-button color="dark" *ngFor="let item of secondcategories">
+        <ion-label (click)="clickEvent(item.id)">{{item.title | translate}}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <ion-refresher slot="fixed" (ionRefresh)="onReload($event)">
+    <ion-refresher-content pullingText="{{ 'PULL_TO_REFRESH' | translate }}"
+      refreshingText="{{ 'REFRESHING' | translate }}">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <empty-view *ngIf="isErrorViewVisible" icon="alert" [text]="'ERROR_NETWORK' | translate"></empty-view>
+
+  <empty-view *ngIf="isEmptyViewVisible" icon="map" [text]="'EMPTY_PLACES'  | translate"></empty-view>
+
+
+  <ion-grid fixed style="margin-bottom: 10px;">
+    <ion-row>
+      <ion-slides pager="true" (ionSlidesDidLoad)="onSlidesTopDidLoad($event)"
+        (ionSlideWillChange)="onSlidesTopWillChange($event)" [options]="slideOpts">
+        <ion-slide *ngFor="let slide of slider" (click)="onSlideTouched(slide)">
+          <img [src]="slide.image._url" alt="">
+        </ion-slide>
+      </ion-slides>
+    </ion-row>
+  </ion-grid>
+  <ion-grid fixed class="p96">
+
+    <ion-row *ngIf="isLoadingViewVisible">
+      <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4" *ngFor="let item of skeletonArray">
+        <ngx-skeleton-loader count="1" appearance="circle"
+          [theme]="{ width: '100%', height: '200px', 'border-radius': '0' }">
+        </ngx-skeleton-loader>
+      </ion-col>
+    </ion-row>
+
+    <ion-row [@staggerIn]="places.length">
+      <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4" class="ion-float-left"
+        *ngFor="let place of places">
+        <app-place-card *ngIf="params.nearby || params.featured || secondcatid === 'all'"
+          [routerLink]="['./' + place.id + '/' + place.slug]" [place]="place"
+          [extraParams]="{ location: location, unit: preference.unit }" [scrollObservable]="loadAndScroll">
+        </app-place-card>
+        <app-place-card *ngIf="params.category && place.secondcategory.id === secondcatid"
+          [routerLink]="['./' + place.id + '/' + place.slug]" [place]="place"
+          [extraParams]="{ location: location, unit: preference.unit }" [scrollObservable]="loadAndScroll">
+        </app-place-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-infinite-scroll *ngIf="isContentViewVisible" (ionInfinite)="onLoadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>
