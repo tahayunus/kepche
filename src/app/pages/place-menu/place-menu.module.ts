@@ -14,8 +14,13 @@ import { SharedModule } from 'src/app/shared.module';
   ],
   imports: [
     SharedModule,
-    FormsModule,
+    FormsModule,,
+    RouterModule.forChild([
+      {
+        path: '',
+        component: PlaceMenuPage
+      }
+    ])
   ],
-  entryComponents: [PlaceMenuPage]
 })
 export class PlaceMenuPageModule {}

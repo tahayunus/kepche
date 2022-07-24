@@ -63,8 +63,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     WalkthroughPageModule,
     SignInPageModule,
     SignUpPageModule,
-    PlaceMenuPageModule,
-    CityModalPageModule,
     IonicStorageModule.forRoot(),
     TranslateModule.forRoot({
       loader: {

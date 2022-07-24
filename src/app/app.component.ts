@@ -23,8 +23,6 @@ import OneSignal from 'onesignal-cordova-plugin';
 import { SignInPage } from './pages/sign-in/sign-in';
 import { SignUpPage } from './pages/sign-up/sign-up';
 import { StatikPage } from './services/statik-page';
-import { Setting } from './services/setting';
-import { CityModalPage } from './pages/city-modal/city-modal.page';
 
 // Call this function when your app starts
 function OneSignalInit(): void {
@@ -48,26 +46,7 @@ function OneSignalInit(): void {
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
-  appPages = [
-    {
-      title: 'PHARMACY_ON_DUTY',
-      url: 'pharmacy-duty',
-      icon: 'medkit'
-    },
-    {
-      title: 'CALL_TAXI',
-      url: 'call-taxi',
-      icon: 'car'
-    },
-    {
-      title: 'EMERGENCY',
-      url: 'emergency',
-      icon: 'warning'
-    }
-  ];
-  myDate = new Date();
   public imageServer: string;
-  public setting: Setting;
   public pages: StatikPage[] = [];
   private user: User;
   private objWindow: any;
@@ -91,7 +70,6 @@ export class AppComponent {
     private statusBar: StatusBar,
     private translate: TranslateService,
     private pageService: StatikPage,
-    private settingService: Setting,
     private placeService: Place
   ) {
 
@@ -113,7 +91,6 @@ export class AppComponent {
     this.setupParse();
     this.setupDefaults();
     this.setupEvents();
-this.getPlace();
     if (this.platform.is('cordova')) {
       await this.platform.ready();
       OneSignalInit();
@@ -123,10 +100,6 @@ this.getPlace();
       this.splashScreen.hide();
     }
 
-  }
-  async getPlace() {
-    this.place = await this.placeService.loadMyPlace(User.getCurrent().id);
-    console.log('Benim Mekan', this.place[0]);
   }
   async setupDefaults() {
     this.translate.setDefaultLang(environment.defaultLang);
@@ -190,16 +163,11 @@ this.getPlace();
       this.updateInstallation();
     });
 
-    if (this.user.city === 'other') {
-      this.openCitiesModal();
-      console.log('Şehir seçili değil');
-    }
 
     this.events.subscribe('user:logout', () => {
       this.onLogOut();
     });
     this.loadStatikPage();
-    this.myDate;
   }
 
   loadCurrentUser() {
@@ -224,26 +192,6 @@ this.getPlace();
     (Parse as any).serverURL = environment.serverUrl;
     (Parse as any).masterKey = environment.masterKey;
 
-    if (!this.platform.is('hybrid')) {
-      // Load the Facebook API asynchronous when the window starts loading
-
-      this.objWindow.fbAsyncInit = function () {
-        Parse.FacebookUtils.init({
-          appId: environment.fbId,
-          cookie: true,
-          xfbml: true,
-          version: 'v1.0'
-        });
-      };
-
-      (function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) { return; }
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/all.js";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-    }
 
     this.loadCurrentUser();
   }
@@ -328,18 +276,7 @@ this.getPlace();
 
     this.dismissLoadingView();
   }
-  async openCitiesModal() {
-
-    await this.showLoadingView();
-
-    const modal = await this.modalCtrl.create({
-      component: CityModalPage
-    });
-
-    await modal.present();
-
-    this.dismissLoadingView();
-  }
+  
 
   async showNotification(notification: any) {
     const trans = await this.translate.get(['NOTIFICATION', 'OK']).toPromise();

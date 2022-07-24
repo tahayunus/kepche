@@ -40,18 +40,18 @@ export class HeaderComponent extends BasePage {
     this.getSelectAddress();
   }
   async getSelectAddress() {
-    this.selectedAddress = await this.addressService.loadOne(this.user.address);
+    if(this.user){
+      this.selectedAddress = await this.addressService.loadOne(this.user.address);
+    } else {
+      this.selectedAddress = null;
+    }
   }
   async openSignInModal() {
-
     await this.showLoadingView({ showOverlay: true });
-
     const modal = await this.modalCtrl.create({
       component: SignInPage
     });
-
     await modal.present();
-
     await this.dismissLoadingView();
   }
 
