@@ -38,9 +38,8 @@ export class Address extends Parse.Object {
   loadOne(id: string): Promise<Address> {
     return new Promise((resolve, reject) => {
       const query = new Parse.Query(Address);
-      query.include('place');
       query.equalTo('objectId', id);
-      query.equalTo('status', 'Active');
+      query.equalTo('isActive', true);
       query.first().then((data: Address) => resolve(data), error => reject(error));
     });
   }
@@ -73,7 +72,7 @@ export class Address extends Parse.Object {
     this.set('address', val);
   }
 
-  get type() {
+  get type():string {
     return this.get('type');
   }
 

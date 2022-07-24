@@ -74,6 +74,17 @@ export class Place extends Parse.Object {
     });
   }
 
+  loadMyPlace(userid: string): Promise<Place[]> {
+
+    return new Promise((resolve, reject) => {
+
+      let query = new Parse.Query(Place);
+
+      query.equalTo('userid', userid);
+
+      query.find().then((data: Place[]) => resolve(data), error => reject(error));
+    });
+  }
   load(params: any = {}): Promise<Place[]> {
 
     const page = params.page || 0;

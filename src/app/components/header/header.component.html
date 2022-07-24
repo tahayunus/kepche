@@ -1,15 +1,15 @@
 <ion-header fixed class="mainHeader">
   <ion-toolbar mode="md" color="light" fixed>
-    <ion-title *ngIf="!selectedAddress">
+    <ion-title *ngIf="selectedAddress?.name.length === 0">
       <ion-item lines="none" [routerLink]="['./address']">
         <ion-icon slot="start" name="location-outline" color="light"></ion-icon>
         <ion-label>{{'SELECT_ADDRESS' | translate}}</ion-label>
       </ion-item>
     </ion-title>
-    <ion-title *ngIf="selectedAddress">
+    <ion-title *ngIf="selectedAddress?.name.length > 0">
       <ion-item lines="none" [routerLink]="['./address']">
         <ion-icon slot="start" name="location-outline" color="light"></ion-icon>
-        <ion-label>{{selectedAddress.value}}</ion-label>
+        <ion-label>{{selectedAddress.name}}</ion-label>
       </ion-item>
     </ion-title>
     <ion-buttons slot="end">      

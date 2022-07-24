@@ -1,6 +1,13 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>place-menu</ion-title>
+<ion-header no-border no-shadow mode="ios">
+  <ion-toolbar mode="ios" color="dark" fixed>
+    <ion-title>
+      <span>{{ 'PLACE_MENU' | translate }}</span>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onDismiss()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

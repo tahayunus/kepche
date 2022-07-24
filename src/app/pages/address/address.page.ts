@@ -46,12 +46,10 @@ export class AddressPage extends BasePage {
     console.log('adresler', this.address)
   }
   selectAddress(event: CustomEvent){
-    
-    if (!event) return;
     const address = event.detail.value;
-
-    this.storage.setAddress(address);
-    console.log('Address', this.storage.getAddress());
-    this.preference.address = address;
+    const data = new User();
+    data.id = this.user.id;
+    data.set('address', address);
+    data.save();
   }
 }

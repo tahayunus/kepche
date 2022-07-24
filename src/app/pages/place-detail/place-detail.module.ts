@@ -10,7 +10,6 @@ import { LightboxModule } from  '@ngx-gallery/lightbox';
 import { GallerizeModule } from  '@ngx-gallery/gallerize';
 import { PlaceUserEditPageModule } from '../place-user-edit/place-user-edit.module';
 import { CheckinPageModule } from '../checkin/checkin.module';
-import { PlaceMenuPageModule } from '../place-menu/place-menu.module';
  
 @NgModule({
   declarations: [
@@ -23,7 +22,6 @@ import { PlaceMenuPageModule } from '../place-menu/place-menu.module';
     PlaceUserEditPageModule,
     SharePageModule,
     CheckinPageModule,
-    PlaceMenuPageModule,
     GalleryModule,
     LightboxModule,
     GallerizeModule,

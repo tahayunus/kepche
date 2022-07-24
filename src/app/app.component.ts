@@ -66,7 +66,6 @@ export class AppComponent {
     }
   ];
   myDate = new Date();
-  id: string = 'gVcQLcECCE';
   public imageServer: string;
   public setting: Setting;
   public pages: StatikPage[] = [];
@@ -74,7 +73,7 @@ export class AppComponent {
   private objWindow: any;
   private loader: any;
   private currentUrl: string;
-
+  private place: Place[] = [];
   constructor(private platform: Platform,
     private router: Router,
     private storage: LocalStorage,
@@ -92,14 +91,15 @@ export class AppComponent {
     private statusBar: StatusBar,
     private translate: TranslateService,
     private pageService: StatikPage,
-    private settingService: Setting) {
+    private settingService: Setting,
+    private placeService: Place
+  ) {
 
     this.initializeApp();
     this.imageServer = environment.imageServer;
   }
 
   async initializeApp() {
-
     if (this.platform.is('desktop')) {
       const config = new Config;
       config.set('rippleEffect', false);
@@ -113,7 +113,7 @@ export class AppComponent {
     this.setupParse();
     this.setupDefaults();
     this.setupEvents();
-
+this.getPlace();
     if (this.platform.is('cordova')) {
       await this.platform.ready();
       OneSignalInit();
@@ -124,7 +124,10 @@ export class AppComponent {
     }
 
   }
-
+  async getPlace() {
+    this.place = await this.placeService.loadMyPlace(User.getCurrent().id);
+    console.log('Benim Mekan', this.place[0]);
+  }
   async setupDefaults() {
     this.translate.setDefaultLang(environment.defaultLang);
     try {
@@ -145,6 +148,14 @@ export class AppComponent {
       const unit = await this.storage.getUnit() || environment.defaultUnit;
       await this.storage.setUnit(unit);
       this.preference.unit = unit;
+    } catch (error) {
+      console.log(error);
+    }
+
+    try {
+      const address = await this.storage.getAddress();
+      await this.storage.setAddress(address);
+      this.preference.address = address;
     } catch (error) {
       console.log(error);
     }

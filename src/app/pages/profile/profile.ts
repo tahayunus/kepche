@@ -25,6 +25,8 @@ export class ProfilePage extends BasePage implements OnInit {
 
   protected params: any = {};
   public user: User;
+  public places: Place[] = [];
+  public place: Place;
   public followers = [];
   public following = [];
   public followersLenght: number;
@@ -39,7 +41,8 @@ export class ProfilePage extends BasePage implements OnInit {
   constructor(
     injector: Injector,
     private photoService: Photo,
-    private userService: User
+    private userService: User,
+    private placeService: Place
   ) {
     super(injector);
 
@@ -77,6 +80,7 @@ export class ProfilePage extends BasePage implements OnInit {
     } else {
       this.openSignInModal();
     }
+    this.getPlace();
   }
 
   async ionViewDidEnter() {
@@ -89,6 +93,12 @@ export class ProfilePage extends BasePage implements OnInit {
     this.setMetaTags({
       title: title
     });
+  }
+  
+  async getPlace() {
+    this.places = await this.placeService.loadMyPlace(User.getCurrent().id);
+    console.log('Benim Mekan', this.places[0]);
+    this.place = this.places[0];
   }
   async getFollowers() {
     const fls = await this.user.followers;

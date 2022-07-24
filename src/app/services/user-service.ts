@@ -196,6 +196,14 @@ export class User extends Parse.User {
     return this.get('city');
   }
 
+  set address(val) {
+    this.set('address', val);
+  }
+
+  get address(): string {
+    return this.get('address');
+  }
+
   set city(val) {
     this.set('city', val);
   }

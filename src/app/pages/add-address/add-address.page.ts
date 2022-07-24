@@ -43,7 +43,6 @@ export class AddAddressPage extends BasePage{
   protected map: google.maps.Map;
   protected geocoder: google.maps.Geocoder;
   protected marker: google.maps.Marker;
-  protected autocompleteService: google.maps.places.AutocompleteService;
   protected placesService: google.maps.places.PlacesService;
   protected mapInitialised: boolean = false;
 
@@ -97,12 +96,10 @@ export class AddAddressPage extends BasePage{
   setupForm() {
     this.form = new FormGroup({
       name: new FormControl('', Validators.required),
-      category: new FormControl(null, Validators.required),
-      secondcategory: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
+      type: new FormControl(''),
       address: new FormControl(''),
       phone: new FormControl(''),
-      website: new FormControl(''),
     });
   }
 
@@ -168,7 +165,6 @@ export class AddAddressPage extends BasePage{
 
     });
 
-    this.autocompleteService = new google.maps.places.AutocompleteService();
     this.placesService = new google.maps.places.PlacesService(this.map);
 
     try {
@@ -241,27 +237,6 @@ export class AddAddressPage extends BasePage{
 
   }
 
-  onSearchAddress(event: any = {}) {
-
-    if (!this.mapInitialised) return;
-
-    const query = event.target.value;
-
-    if (query && query.length >= 3) {
-
-      const config = {
-        input: query,
-        types: ['geocode'],
-      };
-
-      this.autocompleteService.getPlacePredictions(config, (predictions: any) => {
-        this.zone.run(() => {
-          if (predictions) this.suggestions = predictions;
-        });
-      });
-
-    }
-  }
 
   prepareAddressData(): Address {
 
@@ -295,11 +270,6 @@ export class AddAddressPage extends BasePage{
 
     if (!this.location) {
       const trans = await this.getTrans('INVALID_LOCATION');
-      return this.showToast(trans);
-    }
-
-    if (!this.mainUpload) {
-      const trans = await this.getTrans('INVALID_PHOTO');
       return this.showToast(trans);
     }
 

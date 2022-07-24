@@ -16,7 +16,7 @@
 
 <ion-content #container scrollEvents="true">
   <ion-grid fixed>
-    
+
     <ion-row class="ion-align-items-center">
       <ion-col size="6" class="ion-text-start">
         <ion-text color="medium">
@@ -27,11 +27,16 @@
       </ion-col>
     </ion-row>
     <ion-list>
-      <ion-radio-group allowEmptySelection="false" [value]="preference.address" (ionChange)="selectAddress($event)"></ion-radio-group>
-      <ion-item color="light" lines="none" *ngFor="let a of address">
-        <ion-label class="text-large bold">{{a.name}}</ion-label>
-        <ion-radio [value]="a.name"></ion-radio>
-      </ion-item>
+      <ion-radio-group allowEmptySelection="false" (ionChange)="selectAddress($event)">
+        <ion-item color="light" lines="none" *ngFor="let a of address" class="ion-margin-bottom">
+          <ion-label class="text-large bold">{{a.name}}</ion-label>
+          <ion-radio [value]="a.id" [checked]="user.address === a.id ? true : false"></ion-radio>
+        </ion-item>      
+        <ion-item color="light" lines="none" class="ion-margin-bottom">
+          <ion-label class="text-large bold">{{'MY_LOCATION_NOW' | translate}}</ion-label>
+          <ion-radio [value]="'location-'+user.id" [checked]="user.address === 'location-'+user.id ? true : false"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
     </ion-list>
   </ion-grid>
 </ion-content>

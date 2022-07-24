@@ -122,14 +122,14 @@ public imageServer : string;
     }
   }
 
-  async openLocalMenu(id: string){
+  async openLocalMenu(pid: string){
 
     await this.showLoadingView({ showOverlay: true });
 
     const modal = await this.modalCtrl.create({
       component: PlaceMenuPage,
       componentProps: {
-        pid: id
+        pid: pid
       }
     });
 

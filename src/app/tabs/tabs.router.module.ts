@@ -227,6 +227,10 @@ const routes: Routes = [
             loadChildren: () => import('../pages/place-detail/place-detail.module').then(m => m.PlaceDetailPageModule)
           },
           {
+            path: 'places/:id/menu',
+            loadChildren: () => import('../pages/place-menu/place-menu.module').then(m => m.PlaceMenuPageModule)
+          },
+          {
             path: 'places/:id/:slug',
             loadChildren: () => import('../pages/place-detail/place-detail.module').then(m => m.PlaceDetailPageModule)
           }
