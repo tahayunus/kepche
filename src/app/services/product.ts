@@ -41,8 +41,8 @@ export class Product extends Parse.Object {
 
     let query = new Parse.Query(Product);
 
-    query.equalTo('isApprove', isApprove);
-    query.fullText('isActive', isActive);
+    query.equalTo('isApprove', true);
+    query.equalTo('isActive', true);
 
     if (params.bounds) {
 
@@ -84,7 +84,11 @@ export class Product extends Parse.Object {
     query.include('secondcategory');
     return query.find();
   }
-
+  loadMenu(place: any) {
+    let query = new Parse.Query(Product);
+    query.equalTo('place', place);
+    return query.find();
+  }
   get title(): string {
     return this.get('title');
   }
@@ -111,6 +115,10 @@ export class Product extends Parse.Object {
 
   get ratingTotal() {
     return this.get('ratingTotal');
+  }
+
+  get isActive() {
+    return this.get('isActive');
   }
 
   get rating() {

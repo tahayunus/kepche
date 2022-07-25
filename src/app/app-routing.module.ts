@@ -11,10 +11,7 @@ const routes: Routes = [
   { path: 'live-tv', loadChildren: './pages/live-tv/live-tv.module#LiveTvPageModule' },
   { path: 'help', loadChildren: './pages/help/help.module#HelpPageModule' },
   { path: 'map-mapbox', loadChildren: './pages/map-mapbox/map-mapbox.module#MapMapboxPageModule' },
-  { path: 'map-directions', loadChildren: './pages/map-directions/map-directions.module#MapDirectionsPageModule' },  { path: 'product-list', loadChildren: './pages/product-list/product-list.module#ProductListPageModule' },
-  { path: 'product-add', loadChildren: './pages/product-add/product-add.module#ProductAddPageModule' },
-  { path: 'product-user-list', loadChildren: './pages/product-user-list/product-user-list.module#ProductUserListPageModule' },
-  { path: 'product-detail', loadChildren: './pages/product-detail/product-detail.module#ProductDetailPageModule' },
+  { path: 'map-directions', loadChildren: './pages/map-directions/map-directions.module#MapDirectionsPageModule' },
 
 
 

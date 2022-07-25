@@ -1,5 +1,4 @@
-import { Component, Injector, Input, OnInit } from '@angular/core';
-import { MenuCategory } from 'src/app/services/menu-category';
+import { Component, Injector, OnInit } from '@angular/core';
 import { Place } from 'src/app/services/place-service';
 import { Product } from 'src/app/services/product';
 import { BasePage } from '../base-page/base-page';
@@ -9,39 +8,31 @@ import { BasePage } from '../base-page/base-page';
   templateUrl: './place-menu.page.html',
   styleUrls: ['./place-menu.page.scss'],
 })
-export class PlaceMenuPage extends BasePage {
+export class PlaceMenuPage extends BasePage implements OnInit {
+
+
   enableMenuSwipe(): boolean {
     throw new Error('Method not implemented.');
   }
-  
-  @Input() pid: string;
   public products: Product[] = [];
-  public params: any = {};
-  public place: Place;
-  public menuCategories: MenuCategory[] = [];
+  protected params: any = {};
   constructor(
     injector: Injector,
-    public menuCategoryService: MenuCategory,
     private productService: Product
   ) {
     super(injector);
-    this.loadData();
-    
-    console.log('placeid', this.pid);
   }
 
-  async loadData() {
-    this.place = new Place;
-    this.place.id = this.pid;
-    this.place.fetch();
-    this.params.place = this.place;
-
-    this.products = await this.productService.load(this.params);
-    console.log(this.products);
+  ngOnInit() {
+    this.getProducts();
   }
 
+  async getProducts() {
 
-  onDismiss() {
-    return this.modalCtrl.dismiss();
+    const place = new Place();
+    place.id = this.getParams().id;
+    this.products = await this.productService.loadMenu(place);
+    console.log('Ürünler', this.products);
   }
+
 }

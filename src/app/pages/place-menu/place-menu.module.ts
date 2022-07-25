@@ -8,19 +8,21 @@ import { IonicModule } from '@ionic/angular';
 import { PlaceMenuPage } from './place-menu.page';
 import { SharedModule } from 'src/app/shared.module';
 
+const routes: Routes = [
+  {
+    path: '',
+    component: PlaceMenuPage
+  }
+];
+
 @NgModule({
-  declarations: [
-    PlaceMenuPage,
-  ],
   imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
     SharedModule,
-    FormsModule,,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: PlaceMenuPage
-      }
-    ])
+    RouterModule.forChild(routes)
   ],
+  declarations: [PlaceMenuPage]
 })
 export class PlaceMenuPageModule {}
