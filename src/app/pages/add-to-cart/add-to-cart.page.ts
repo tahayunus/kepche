@@ -4,11 +4,11 @@ import { Product } from 'src/app/services/product';
 import { BasePage } from '../base-page/base-page';
 
 @Component({
-  selector: 'app-place-menu-modal',
-  templateUrl: './place-menu-modal.page.html',
-  styleUrls: ['./place-menu-modal.page.scss'],
+  selector: 'app-add-to-cart',
+  templateUrl: './add-to-cart.page.html',
+  styleUrls: ['./add-to-cart.page.scss'],
 })
-export class PlaceMenuModalPage extends BasePage implements OnInit {
+export class AddToCart extends BasePage implements OnInit {
   public form: FormGroup;
   id: any;
   public product: Product;

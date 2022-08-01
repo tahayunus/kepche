@@ -52,7 +52,7 @@ export class MapMapboxPage extends BasePage {
       'text-radial-offset': 2,
       'text-justify': 'auto',
       'icon-image': '{icon}',
-      'icon-size': 0.05,
+      'icon-size': 1,
       'icon-allow-overlap': true
     }
   }
@@ -156,7 +156,7 @@ export class MapMapboxPage extends BasePage {
           'properties': {
             'description': data.id,
             'title': data.title,
-            'icon': data.category.id
+            'icon': data.id
           },
           'geometry': {
             'type': 'Point',
@@ -211,7 +211,7 @@ export class MapMapboxPage extends BasePage {
 
 
         this.map.loadImage(
-          'assets/map/user/'+this.user.mapIcon+'.png',
+          'assets/map/user/' + this.user.mapIcon + '.png',
           (error, image) => {
             if (error) throw error;
 
@@ -249,16 +249,14 @@ export class MapMapboxPage extends BasePage {
           }
         );
 
-        categories.forEach((category) => {
-          if (category.parentId === "0") {
-            this.map.loadImage(
-              category.iconMap._url,
-              (error, image) => {
-                if (error) throw error;
-                this.map.addImage(category.id, image);
-              }
-            );
-          }
+        this.places.forEach((place) => {
+          this.map.loadImage(
+            'assets/img/pin.png',
+            (error, image) => {
+              if (error) throw error;
+              this.map.addImage(place.id, image);
+            }
+          );
         });
       });
     } catch (err) {

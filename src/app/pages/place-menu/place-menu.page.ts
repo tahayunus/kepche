@@ -16,7 +16,7 @@ export class PlaceMenuPage extends BasePage implements OnInit {
 
   public toggle = false;
   public disableAutomaticDebit: Boolean;
-  private user: User
+  public user: User
   public products: Product[] = [];
   public place: Place;
   protected params: any = {};
@@ -33,6 +33,15 @@ export class PlaceMenuPage extends BasePage implements OnInit {
   }
   ngOnInit() {
     this.user = User.getCurrent();
+
+    this.events.subscribe('user:login', () => {
+      this.user = User.getCurrent();
+    });
+
+    this.events.subscribe('user:loggedOut', () => {
+      this.user = null;
+    });
+    console.log('User', this.user)
     this.getProducts();
     this.getPlace();
   }

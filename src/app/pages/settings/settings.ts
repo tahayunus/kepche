@@ -61,7 +61,7 @@ export class SettingsPage extends BasePage implements OnInit{
     data.id = this.user.id;
     data.set('phoneNot', this.changePhone);
     data.save();
-    console.log('sonuc1', this.changePhone)
+    console.log('sonuc1', this.changePhone);
   }
   goSmsNot(event: boolean) {
     if (event === true) {
