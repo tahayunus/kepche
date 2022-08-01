@@ -149,7 +149,11 @@ const routes: Routes = [
           {
             path: ':id/:slug',
             loadChildren: () => import('../pages/place-detail/place-detail.module').then(m => m.PlaceDetailPageModule)
-          }
+          },
+          {
+            path: ':id/menu',
+            loadChildren: () => import('../pages/place-menu/place-menu.module').then(m => m.PlaceMenuPageModule)
+          },
         ]
       },
       {

@@ -25,12 +25,12 @@
             </ion-col>
             <ion-col size="8">
               <ion-item lines="none">
-                <ion-label class="text-normal">{{p.title}}{{p.userid}}{{user?.id}}</ion-label>
+                <ion-label class="text-normal">{{p.title}}</ion-label>
               </ion-item>
               <ion-item lines="none">
                 <ion-label class="bold ion-no-margin">{{p.price}} ₺ - {{p.quantity}} porsiyon</ion-label>
               </ion-item>
-              <ion-item lines="none">
+              <ion-item lines="none" *ngIf="p.place?.userid != userid">
                 <ion-row>
                   <ion-col size="12">
                     <ion-button mode="ios" shape="round" size="small" color="warning" expand="block" (click)="addToCart(p.id)">
@@ -39,7 +39,7 @@
                   </ion-col>
                 </ion-row>
               </ion-item>
-              <ion-item lines="none" *ngIf="p.userid === user?.id">
+              <ion-item lines="none" *ngIf="p.place?.userid === userid">
                 <ion-row>
                   <ion-col size="6">
                     <ion-toggle mode="ios" name="blueberry" (ionChange)="changeStatus(p.isActive, p.id)" [checked]="p.isActive ? true : false">

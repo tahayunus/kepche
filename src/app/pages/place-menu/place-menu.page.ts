@@ -14,9 +14,10 @@ import { PlaceMenuModalPage } from '../place-menu-modal/place-menu-modal.page';
 export class PlaceMenuPage extends BasePage implements OnInit {
 
 
+  public userid: string;
   public toggle = false;
   public disableAutomaticDebit: Boolean;
-  public user: User
+  public user: User;
   public products: Product[] = [];
   public place: Place;
   protected params: any = {};
@@ -36,11 +37,14 @@ export class PlaceMenuPage extends BasePage implements OnInit {
 
     this.events.subscribe('user:login', () => {
       this.user = User.getCurrent();
+      
     });
 
     this.events.subscribe('user:loggedOut', () => {
       this.user = null;
     });
+    
+this.userid=this.user.id;
     console.log('User', this.user)
     this.getProducts();
     this.getPlace();

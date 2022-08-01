@@ -27,7 +27,7 @@ import { Product } from 'src/app/services/product';
 export class HomePage extends BasePage {
 
   @ViewChild(IonContent, { static: true }) container: IonContent;
-
+public userid: string;
   public user: User;
   lPlaces = [];
   arrayTitle = [];
