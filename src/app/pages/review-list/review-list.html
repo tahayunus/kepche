@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar mode="ios" color="dark" fixed>
+  <ion-toolbar mode="ios" color="danger" fixed>
     <ion-buttons slot="start">
       <ion-back-button  text="{{'BACK'|translate}}"></ion-back-button>
     </ion-buttons>
@@ -66,14 +66,14 @@
                     {{ review.createdAt | date:'mediumDate' }}
                   </span>
                 </ion-text>
-                <ion-text color="dark">
+                <ion-text color="danger">
                   <h3 class="bold no-margin">{{ review.user?.name }}</h3>
                 </ion-text>
                 <star-rating [value]="review.rating" checkedcolor="#f2b01e" 
                   uncheckedcolor="gray" size="12px" readonly="true">
                 </star-rating>
 
-                <ion-text color="dark">
+                <ion-text color="danger">
                   <p class="text-medium no-margin">{{ review.comment }}</p>
                 </ion-text>
               </ion-label>

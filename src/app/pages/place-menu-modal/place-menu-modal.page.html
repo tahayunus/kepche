@@ -1,0 +1,41 @@
+<ion-content class="ion-padding ion-fixed">
+  <ion-grid class="ion-text-center">
+    <ion-icon (click)="onDismiss()" name="chevron-down-outline"></ion-icon>
+  </ion-grid>
+  <ion-grid fixed>
+    <ion-label position="stacked" color="medium" class="ion-justify-content-center ion-margin-bottom">
+      <span class="bold">{{ 'PRICE' | translate }}</span>
+    </ion-label>
+    <ion-item class="ion-margin-vertical" lines="none" color="light" class="ion-text-center">
+      <ion-input type="number" id="price" [value]="price"></ion-input>
+    </ion-item>
+
+    <ion-label position="stacked" color="medium" class="ion-justify-content-center ion-margin-bottom">
+      <span class="bold">{{ 'QUANTITY' | translate }}</span>
+    </ion-label>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size-xs="6" size-md="4">
+        <ion-buttons class="ion-justify-content-center">
+          <ion-button class="minus" color="danger" size="large" (click)="changeQuantity('minus')" [disabled]="quantity === 0 ? true : false">
+            <ion-icon name="remove-circle-outline" color="dark"></ion-icon>
+          </ion-button>
+          <ion-button class="number" color="light" size="large">
+            <ion-label color="dark">{{quantity}}</ion-label>
+          </ion-button>
+          <ion-button class="plus" color="success" size="large" (click)="changeQuantity('plus')" [disabled]="quantity === 10 ? true : false">
+            <ion-icon name="add-circle-outline" color="dark"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center">
+      <ion-col size-xs="6" size-md="4">
+        <ion-button class="ion-margin-vertical ion-strong" (click)="onSubmit()" color="success" expand="block"
+          shape="round">
+          <span>{{ 'BROADCAST' | translate }}</span>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

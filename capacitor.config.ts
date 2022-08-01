@@ -1,15 +1,15 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'Nearme 5',
+  appId: 'com.kepcheapp.tr',
+  appName: 'Kepche App',
   webDir: 'www',
   bundledWebRuntime: false,
   cordova: {
     preferences: {
       orientation: 'portrait',
       ScrollEnabled: 'false',
-      'android-minSdkVersion': '19',
+      'android-minSdkVersion': '24',
       BackupWebStorage: 'none',
       SplashMaintainAspectRatio: 'true',
       FadeSplashScreenDuration: '300',

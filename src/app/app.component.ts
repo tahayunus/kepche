@@ -53,7 +53,8 @@ export class AppComponent {
   private loader: any;
   private currentUrl: string;
   private place: Place[] = [];
-  constructor(private platform: Platform,
+  constructor(
+    private platform: Platform,
     private router: Router,
     private storage: LocalStorage,
     private preference: Preference,

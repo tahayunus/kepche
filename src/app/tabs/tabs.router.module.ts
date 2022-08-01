@@ -85,8 +85,12 @@ const routes: Routes = [
             loadChildren: () => import('../pages/place-detail/place-detail.module').then(m => m.PlaceDetailPageModule)
           },
           {
-            path: 'places/:id/:slug',
-            loadChildren: () => import('../pages/place-detail/place-detail.module').then(m => m.PlaceDetailPageModule)
+            path: 'places/:id/menu',
+            loadChildren: () => import('../pages/place-menu/place-menu.module').then(m => m.PlaceMenuPageModule)
+          },
+          {
+            path: 'places/:id/menu/:product/edit',
+            loadChildren: () => import('../pages/product-edit/product-edit.module').then(m => m.ProductEditPageModule)
           },
         ]
       },
@@ -114,9 +118,13 @@ const routes: Routes = [
             loadChildren: () => import('../pages/place-detail/place-detail.module').then(m => m.PlaceDetailPageModule)
           },
           {
-            path: ':id/:slug',
-            loadChildren: () => import('../pages/place-detail/place-detail.module').then(m => m.PlaceDetailPageModule)
-          }
+            path: ':id/menu',
+            loadChildren: () => import('../pages/place-menu/place-menu.module').then(m => m.PlaceMenuPageModule)
+          },
+          {
+            path: ':id/menu/:product/edit',
+            loadChildren: () => import('../pages/product-edit/product-edit.module').then(m => m.ProductEditPageModule)
+          },
         ]
       },
       {
@@ -229,6 +237,10 @@ const routes: Routes = [
           {
             path: 'places/:id/menu',
             loadChildren: () => import('../pages/place-menu/place-menu.module').then(m => m.PlaceMenuPageModule)
+          },
+          {
+            path: 'places/:id/menu/:product/edit',
+            loadChildren: () => import('../pages/product-edit/product-edit.module').then(m => m.ProductEditPageModule)
           },
           {
             path: 'places/:id/:slug',

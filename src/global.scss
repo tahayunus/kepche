@@ -122,6 +122,17 @@ div[text-nowrap] {
   position: fixed;
   overflow: hidden;
 }
+.menuModal .modal-wrapper {
+  opacity: 1;
+  height: 400px;
+  width: calc(100% - 40px);
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  border-radius: 30px;
+  position: fixed;
+  overflow: hidden;
+}
 .fullscreen {
   width: 100% !important;
   height: 100% !important;

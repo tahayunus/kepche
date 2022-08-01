@@ -1,5 +1,5 @@
 <ion-header no-border>
-  <ion-toolbar color="dark">
+  <ion-toolbar color="danger">
     <ion-title>{{ 'FRIENDS' | translate }}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="onDismiss()">
@@ -32,7 +32,7 @@
               <ion-button *ngIf="fls[i].request === 0" size="small" color="primary" shape="round">
                 <ion-label>Takip Et</ion-label>
               </ion-button>
-              <ion-button *ngIf="fls[i].request === 1" (click)="unfollow(i)" size="small" color="dark" shape="round">
+              <ion-button *ngIf="fls[i].request === 1" (click)="unfollow(i)" size="small" color="danger" shape="round">
                 <ion-label>Takip</ion-label>
               </ion-button>
             </ion-col>
@@ -63,7 +63,7 @@
               <ion-button *ngIf="flw[i].request === 0" size="small" color="primary" shape="round">
                 <ion-label>Takip Et</ion-label>
               </ion-button>
-              <ion-button *ngIf="flw[i].request === 1" (click)="unfollow(i)" size="small" color="dark" shape="round">
+              <ion-button *ngIf="flw[i].request === 1" (click)="unfollow(i)" size="small" color="danger" shape="round">
                 <ion-label>Takip</ion-label>
               </ion-button>
             </ion-col>

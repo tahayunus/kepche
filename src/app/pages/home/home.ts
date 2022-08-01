@@ -87,7 +87,7 @@ export class HomePage extends BasePage {
   }
 
   async ionViewDidEnter() {
-    const title = 'Güvercin App';
+    const title = 'Kepche';
     this.setPageTitle(title);
 
     this.setMetaTags({

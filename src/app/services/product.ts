@@ -89,6 +89,13 @@ export class Product extends Parse.Object {
     query.equalTo('place', place);
     return query.find();
   }
+  
+
+  loadOne(id: string): Promise<Product> {
+    const query = new Parse.Query(Product);
+    query.equalTo('objectId', id);
+    return query.get(id);
+  }
   get title(): string {
     return this.get('title');
   }

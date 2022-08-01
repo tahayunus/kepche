@@ -9,7 +9,7 @@ export const environment = {
   restApiKey: 'dLJAM2RKnLXcZ8s5lojiR432uUfETX9csbFd3Vgn',
   appName: 'food',
   allowOrigin: '*',
-  appUrl: 'https://web.guvercinapp.com',
+  appUrl: 'https://web.kepcheapp.com',
   appImageUrl: '',
   fbId: '4358881607508127',
   googleMapsApiKey: 'AIzaSyDcW73wVlGf9RVfP4p5uNW1f5S_pu5JuME',

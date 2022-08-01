@@ -1,5 +1,5 @@
 <ion-header class="ion-no-border ion-no-shadow" mode="ios">
-  <ion-toolbar color="dark" fixed>
+  <ion-toolbar color="danger" fixed>
     <ion-buttons slot="start">
       <ion-button (click)="goBack()">
         <ion-icon name="return-up-back-outline" slot="icon-only"></ion-icon>
@@ -135,7 +135,7 @@
                       [scrollObservable]="loadAndScroll" />
                   </ion-thumbnail>
                   <ion-label text-nowrap>
-                    <ion-text color="dark">
+                    <ion-text color="danger">
                       <h2 class="bold ellipsis ion-text" color="primary">
                         {{ place?.title }}
                       </h2>
@@ -246,14 +246,14 @@
                             {{ review.createdAt | date:'short'}}
                           </span>
                         </ion-text>
-                        <ion-text color="dark">
+                        <ion-text color="danger">
                           <h3 class="bold no-margin">{{ review.user?.name }}</h3>
                         </ion-text>
                         <star-rating [value]="review.rating" checkedcolor="#f2b01e" uncheckedcolor="gray" size="12px"
                           readonly="true">
                         </star-rating>
 
-                        <ion-text color="dark">
+                        <ion-text color="danger">
                           <p class="text-medium no-margin">{{ review.comment }}</p>
                         </ion-text>
                       </ion-label>
@@ -262,7 +262,7 @@
                   </div>
                 </ion-list>
                 <div class="ion-text-center" *ngIf="reviews.length">
-                  <ion-button class="bold" fill="clear" color="dark" [routerLink]="['./reviews']">
+                  <ion-button class="bold" fill="clear" color="danger" [routerLink]="['./reviews']">
                     {{ 'VIEW_ALL_REVIEWS' | translate }}
                     <ion-icon slot="end" name="arrow-round-forward"></ion-icon>
                   </ion-button>

@@ -1,5 +1,5 @@
 <ion-header no-border>
-  <ion-toolbar color="dark">
+  <ion-toolbar color="danger">
     <ion-buttons slot="end">
       <ion-button fill="clear" (click)="onDismiss()">
         <ion-icon name="close"></ion-icon>
@@ -17,7 +17,7 @@
       <ion-col size="6" *ngFor="let st of status">
         <ion-item (click)="selectEmoji(st.title)" class="feel" lines="none"
           [ngClass]="selectedEmoji === st.title ? 'borderDark' : ''">
-          <ion-label color="dark">{{st.title | translate}}</ion-label>
+          <ion-label color="danger">{{st.title | translate}}</ion-label>
           <img slot="start" [src]="'assets/feel/'+st.title+'.png'" width="24" height="24" />
         </ion-item>
       </ion-col>

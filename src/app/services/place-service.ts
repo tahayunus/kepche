@@ -494,6 +494,14 @@ export class Place extends Parse.Object {
     this.set('title', val);
   }
 
+  get userid(): string {
+    return this.get('userid');
+  }
+
+  set userid(val) {
+    this.set('userid', val);
+  }
+
   get description(): string {
     return this.get('description');
   }

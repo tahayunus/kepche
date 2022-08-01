@@ -80,7 +80,7 @@
         <div class="ion-margin-bottom">
           <ion-row (scroll)="onScroll()" class="scrollable ion-padding-start ion-padding-end">
             <ion-col size-xs="12" size-sm="6" size-md="4" size-lg="4" *ngFor="let place of featuredPlaces">
-              <app-place-card [routerLink]="['../places/' + place.id + '/' + place.slug]" [place]="place"
+              <app-place-card [routerLink]="['../places/' + place.id]" [place]="place"
                 [extraParams]="{ location: location, unit: preference.unit }" [scrollObservable]="loadAndScroll">
               </app-place-card>
             </ion-col>
@@ -109,7 +109,7 @@
         <div class="ion-margin-bottom">
           <ion-row (scroll)="onScroll()" class="scrollable ion-padding-start ion-padding-end">
             <ion-col size-xs="12" size-sm="6" size-md="4" size-lg="4" *ngFor="let place of newPlaces">
-              <app-place-card [routerLink]="['../places/' + place.id + '/' + place.slug]" [place]="place"
+              <app-place-card [routerLink]="['../places/' + place.id]" [place]="place"
                 [extraParams]="{ location: location, unit: preference.unit }" [scrollObservable]="loadAndScroll">
               </app-place-card>
             </ion-col>
@@ -138,7 +138,7 @@
         <div class="ion-margin-bottom">
           <ion-row class="ion-padding-start ion-padding-end scrollable" (scroll)="onScroll()">
             <ion-col size-xs="12" size-sm="6" size-md="4" size-lg="4" *ngFor="let place of nearbyPlaces">
-              <app-place-card [routerLink]="['../places/' + place.id + '/' + place.slug]" [place]="place"
+              <app-place-card [routerLink]="['../places/' + place.id]" [place]="place"
                 [extraParams]="{ location: location, unit: preference.unit }" [scrollObservable]="loadAndScroll">
               </app-place-card>
             </ion-col>

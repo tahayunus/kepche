@@ -9,7 +9,7 @@ export const environment = {
   restApiKey: 'Iame8CtvCaRuXEJRGsULQnuVPgQ4vbLdJxtYSIrt',
   appName: 'neyesem',
   allowOrigin: '*',
-  appUrl: 'https://web.guvercinapp.com',
+  appUrl: 'https://web.kepcheapp.com',
   appImageUrl: '',
   fbId: '4358881607508127',
   googleMapsApiKey: 'AIzaSyDcW73wVlGf9RVfP4p5uNW1f5S_pu5JuME',

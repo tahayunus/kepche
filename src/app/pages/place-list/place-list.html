@@ -1,7 +1,7 @@
 <app-header></app-header>
 <ion-content #container scrollEvents="true">
   <ion-header class="ion-no-border ion-no-shadow" mode="ios">
-    <ion-toolbar mode="ios" color="dark" fixed>
+    <ion-toolbar mode="ios" color="danger" fixed>
       <ion-buttons slot="start" *ngIf="params.category || params.featured || params.nearby">
         <ion-button (click)="goBack()">
           <ion-icon name="return-up-back-outline" slot="icon-only"></ion-icon>
@@ -19,11 +19,11 @@
   </ion-header>
 
   <div class="status-wrapper" style="margin-bottom: 20px;" *ngIf="params.category">
-    <ion-segment scrollable value="heart" color="dark">
-      <ion-segment-button style="padding-left: 5;" color="dark">
+    <ion-segment scrollable value="heart" color="danger">
+      <ion-segment-button style="padding-left: 5;" color="danger">
         <ion-label (click)="clickEvent('all')">{{'ALL' | translate}}</ion-label>
       </ion-segment-button>
-      <ion-segment-button color="dark" *ngFor="let item of secondcategories">
+      <ion-segment-button color="danger" *ngFor="let item of secondcategories">
         <ion-label (click)="clickEvent(item.id)">{{item.title | translate}}</ion-label>
       </ion-segment-button>
     </ion-segment>

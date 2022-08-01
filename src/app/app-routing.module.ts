@@ -12,6 +12,8 @@ const routes: Routes = [
   { path: 'help', loadChildren: './pages/help/help.module#HelpPageModule' },
   { path: 'map-mapbox', loadChildren: './pages/map-mapbox/map-mapbox.module#MapMapboxPageModule' },
   { path: 'map-directions', loadChildren: './pages/map-directions/map-directions.module#MapDirectionsPageModule' },
+  { path: 'product-edit', loadChildren: './pages/product-edit/product-edit.module#ProductEditPageModule' },
+
 
 
 

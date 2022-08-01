@@ -15,7 +15,7 @@
         <ion-icon name="log-in-outline"></ion-icon>
       </ion-button>
 
-      <ion-button fill="clear" color="dark" [routerLink]="['./../../search']">
+      <ion-button fill="clear" color="danger" [routerLink]="['./../../search']">
         <ion-icon name="search-outline" slot="icon-only"></ion-icon>
       </ion-button>
 
@@ -83,7 +83,7 @@
                   <img [src]="photo?.place.attributes.image.url()" height="32" />
                 </ion-avatar>
               </span>
-              <ion-text color="dark" class="ion-text-start ion-padding-bottom ion-padding-top">
+              <ion-text color="danger" class="ion-text-start ion-padding-bottom ion-padding-top">
                 <span style="line-height: 24px;">
                   <div class="bold" [routerLink]="['./../places/'+photo?.place.id]">{{ photo?.place.attributes.title }}</div>
                   <span class="text-medium bold">{{photo.createdAt | date:'dd'}} {{'MONTH'+[photo.createdAt | date:'MM']
@@ -98,18 +98,18 @@
                   <ion-buttons slot="start">
                     <ion-button (click)="likeButton(photo.id,photo.like,isliked[i],i)">
                       <ion-icon *ngIf="isliked[i]" name="flame" color="warning" slot="icon-only"></ion-icon>
-                      <ion-icon *ngIf="!isliked[i]" name="flame-outline" color="dark" slot="icon-only"></ion-icon>
+                      <ion-icon *ngIf="!isliked[i]" name="flame-outline" color="danger" slot="icon-only"></ion-icon>
                     </ion-button>
                     <ion-button (click)="onComment(photo)">
-                      <ion-icon name="chatbubbles-outline" color="dark" slot="icon-only"></ion-icon>
+                      <ion-icon name="chatbubbles-outline" color="danger" slot="icon-only"></ion-icon>
                     </ion-button>
                     <ion-button>
-                      <ion-icon color="dark" name="arrow-redo-outline" slot="icon-only"></ion-icon>
+                      <ion-icon color="danger" name="arrow-redo-outline" slot="icon-only"></ion-icon>
                     </ion-button>
                   </ion-buttons>
                   <ion-buttons slot="end">
                     <ion-button>
-                      <ion-icon name="bookmark-outline" color="dark" slot="icon-only"></ion-icon>
+                      <ion-icon name="bookmark-outline" color="danger" slot="icon-only"></ion-icon>
                     </ion-button>
                   </ion-buttons>
                 </ion-toolbar>
