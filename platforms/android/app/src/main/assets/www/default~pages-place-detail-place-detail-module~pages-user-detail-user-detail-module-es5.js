@@ -17190,6 +17190,13 @@ var Photo = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(Photo.prototype, "relations", {
+        get: function () {
+            return this.get('relations');
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(Photo.prototype, "like", {
         get: function () {
             return this.get('like');

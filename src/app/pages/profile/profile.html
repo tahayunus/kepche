@@ -1,5 +1,11 @@
 <app-header></app-header>
-<ion-content>
+<ion-content #container scrollEvents="true">
+
+  <ion-refresher slot="fixed" (ionRefresh)="onReload($event)">
+    <ion-refresher-content pullingText="{{ 'PULL_TO_REFRESH' | translate }}"
+      refreshingText="{{ 'REFRESHING' | translate }}">
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-grid fixed class="p96">
     <ion-row class="ion-justify-content-center">
       <ion-col class="ion-no-padding" size-xs="12" size-sm="12" size-md="8" size-lg="8">
@@ -52,7 +58,18 @@
               </ion-button>
             </ion-card>
 
-            <ion-card mode="ios" fixed style="width: 100%;" class="ion-no-margin ion-margin-top" *ngIf="user && place?.id.length">
+            <ion-card mode="ios" fixed style="width: 100%;" class="ion-no-margin ion-margin-top" *ngIf="user && !place">
+              <ion-row class="ion-justify-content-center">
+                <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" class="ion-text-center">
+                  <ion-label class="text-normal bold">{{'BE_PARTNER' | translate}}</ion-label>
+                </ion-col>
+                <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" class="ion-text-center" [routerLink]="['./places/add']">
+                    <ion-button shape="round" color="warning" size="small">{{'ADD_PLACE' | translate}}</ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-card>
+
+            <ion-card mode="ios" fixed style="width: 100%;" class="ion-no-margin ion-margin-top" *ngIf="user && place">
               <ion-row class="ion-justify-content-center">
                 <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="12" class="ion-text-center">
                   <ion-label class="text-normal bold">{{place?.title}}</ion-label>

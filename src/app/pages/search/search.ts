@@ -192,13 +192,13 @@ export class SearchPage extends BasePage {
     const usr = User.getCurrent();
     let usrId = [];
     let plcId = [];
-    usr.searchLog.forEach(e => {
+    usr.searchData.forEach(e => {
       if (e.type === 'user') {
         usrId.push(e.id);
       }
     });
 
-    usr.searchLog.forEach(e => {
+    usr.searchData.forEach(e => {
       if (e.type === 'place') {
         plcId.push(e.id);
       }
@@ -335,24 +335,24 @@ export class SearchPage extends BasePage {
   async placeClick(id) {
     const query = new User();
     query.id = User.getCurrent().id;
-    const searchLog = await User.getCurrent().searchLog;
-    searchLog.push({
+    const searchData = await User.getCurrent().searchData;
+    searchData.push({
       "id": id,
       "type": "place"
     })
-    query.set("searchLog", searchLog);
+    query.set("searchData", searchData);
     query.save();
   }
 
   async userClick(id) {
     const query = new User();
     query.id = User.getCurrent().id;
-    const searchLog = await User.getCurrent().searchLog;
-    searchLog.push({
+    const searchData = await User.getCurrent().searchData;
+    searchData.push({
       "id": id,
       "type": "user"
     })
-    query.set("searchLog", searchLog);
+    query.set("searchData", searchData);
     query.save();
   }
 

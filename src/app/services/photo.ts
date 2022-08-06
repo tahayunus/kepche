@@ -68,6 +68,10 @@ export class Photo extends Parse.Object {
     return this.get('place');
   }
 
+  get relations(): any {
+    return this.get('relations');
+  }
+
   get like(): any {
     return this.get('like');
   }

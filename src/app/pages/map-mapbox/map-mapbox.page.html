@@ -1,37 +1,20 @@
-<ion-header fixed class="mainHeader">
-  <ion-toolbar mode="md" color="light" fixed>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>
-      <a routerLink="/">
-        <img class="logo" src="./assets/img/pigeon.svg" />
-        <img class="logo" src="./assets/img/logo_.png" />
-      </a>
-    </ion-title>
-    <ion-buttons slot="end">
-
-      <ion-button (click)="openSignInModal()" layout="icon-start" *ngIf="platform.is('mobile') && !user">
-        <ion-icon name="log-in-outline"></ion-icon>
-      </ion-button>
-
-      <ion-button fill="clear" color="danger" [routerLink]="['./../../search']">
-        <ion-icon name="search-outline" slot="icon-only"></ion-icon>
-      </ion-button>
-
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content class="noScroll" no-bounce [attr.style]="ionContentStylePadding">
   <ion-grid class="fullscreen ion-no-padding" fixed>
-    <ion-row class="fullscreen" justify-content-center>
+    <ion-row class="fullscreen ion-justify-content-center">
       <ion-col class="ion-no-padding" size-xs="12" size-lg="12">
         <div id="map"></div>
         <div id="searchButton" class="ion-text-center">
+        </div>
+        <div id="map-header">
+          <ion-button class="left" color="warning" slot="ion-only">
+            <ion-icon name="locate-sharp"></ion-icon>
+          </ion-button>
           <ion-button class="ion-text-center" shape="round" size="small" color="secondary"
             (click)="onSearchButtonTapped()">
-            {{'SEARCH_THIS_AREA'|translate}}
+            <ion-label class="bold" class="light">{{'SEARCH_THIS_AREA'|translate}}</ion-label>
+          </ion-button>
+          <ion-button class="right" color="warning" slot="ion-only">
+            <ion-icon name="search-sharp"></ion-icon>
           </ion-button>
         </div>
       </ion-col>

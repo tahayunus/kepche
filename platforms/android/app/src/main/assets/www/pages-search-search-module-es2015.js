@@ -240,12 +240,12 @@ let SearchPage = class SearchPage extends _base_page_base_page__WEBPACK_IMPORTED
             const usr = src_app_services_user_service__WEBPACK_IMPORTED_MODULE_9__["User"].getCurrent();
             let usrId = [];
             let plcId = [];
-            usr.searchLog.forEach(e => {
+            usr.searchData.forEach(e => {
                 if (e.type === 'user') {
                     usrId.push(e.id);
                 }
             });
-            usr.searchLog.forEach(e => {
+            usr.searchData.forEach(e => {
                 if (e.type === 'place') {
                     plcId.push(e.id);
                 }
@@ -366,12 +366,12 @@ let SearchPage = class SearchPage extends _base_page_base_page__WEBPACK_IMPORTED
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             const query = new src_app_services_user_service__WEBPACK_IMPORTED_MODULE_9__["User"]();
             query.id = src_app_services_user_service__WEBPACK_IMPORTED_MODULE_9__["User"].getCurrent().id;
-            const searchLog = yield src_app_services_user_service__WEBPACK_IMPORTED_MODULE_9__["User"].getCurrent().searchLog;
-            searchLog.push({
+            const searchData = yield src_app_services_user_service__WEBPACK_IMPORTED_MODULE_9__["User"].getCurrent().searchData;
+            searchData.push({
                 "id": id,
                 "type": "place"
             });
-            query.set("searchLog", searchLog);
+            query.set("searchData", searchData);
             query.save();
         });
     }
@@ -379,12 +379,12 @@ let SearchPage = class SearchPage extends _base_page_base_page__WEBPACK_IMPORTED
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             const query = new src_app_services_user_service__WEBPACK_IMPORTED_MODULE_9__["User"]();
             query.id = src_app_services_user_service__WEBPACK_IMPORTED_MODULE_9__["User"].getCurrent().id;
-            const searchLog = yield src_app_services_user_service__WEBPACK_IMPORTED_MODULE_9__["User"].getCurrent().searchLog;
-            searchLog.push({
+            const searchData = yield src_app_services_user_service__WEBPACK_IMPORTED_MODULE_9__["User"].getCurrent().searchData;
+            searchData.push({
                 "id": id,
                 "type": "user"
             });
-            query.set("searchLog", searchLog);
+            query.set("searchData", searchData);
             query.save();
         });
     }

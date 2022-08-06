@@ -324,7 +324,11 @@ const routes = [
                     {
                         path: ':id/:slug',
                         loadChildren: () => Promise.all(/*! import() | pages-place-detail-place-detail-module */[__webpack_require__.e("default~pages-add-address-add-address-module~pages-place-add-place-add-module~pages-place-detail-pla~98be4056"), __webpack_require__.e("default~pages-place-detail-place-detail-module~pages-post-detail-post-detail-module~pages-user-detai~10165292"), __webpack_require__.e("default~pages-place-detail-place-detail-module~pages-user-detail-user-detail-module"), __webpack_require__.e("default~pages-place-detail-place-detail-module~pages-profile-profile-module"), __webpack_require__.e("default~pages-place-detail-place-detail-module~pages-place-menu-place-menu-module"), __webpack_require__.e("pages-place-detail-place-detail-module")]).then(__webpack_require__.bind(null, /*! ../pages/place-detail/place-detail.module */ "./src/app/pages/place-detail/place-detail.module.ts")).then(m => m.PlaceDetailPageModule)
-                    }
+                    },
+                    {
+                        path: ':id/menu',
+                        loadChildren: () => Promise.all(/*! import() | pages-place-menu-place-menu-module */[__webpack_require__.e("default~pages-add-address-add-address-module~pages-place-add-place-add-module~pages-place-detail-pla~98be4056"), __webpack_require__.e("default~pages-place-detail-place-detail-module~pages-place-menu-place-menu-module"), __webpack_require__.e("pages-place-menu-place-menu-module")]).then(__webpack_require__.bind(null, /*! ../pages/place-menu/place-menu.module */ "./src/app/pages/place-menu/place-menu.module.ts")).then(m => m.PlaceMenuPageModule)
+                    },
                 ]
             },
             {

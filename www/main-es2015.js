@@ -440,7 +440,7 @@ module.exports = "<div class=\"container\">\r\n  <ion-icon [name]=\"icon\" color
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header fixed class=\"mainHeader\">\r\n  <ion-toolbar mode=\"md\" color=\"light\" fixed>\r\n    <ion-title *ngIf=\"selectedAddress?.name.length === 0\">\r\n      <ion-item lines=\"none\" [routerLink]=\"['./address']\">\r\n        <ion-icon slot=\"start\" name=\"location-outline\" color=\"light\"></ion-icon>\r\n        <ion-label>{{'SELECT_ADDRESS' | translate}}</ion-label>\r\n      </ion-item>\r\n    </ion-title>\r\n    <ion-title *ngIf=\"selectedAddress?.name.length > 0\">\r\n      <ion-item lines=\"none\" [routerLink]=\"['./address']\">\r\n        <ion-icon slot=\"start\" name=\"location-outline\" color=\"light\"></ion-icon>\r\n        <ion-label>{{selectedAddress.name}}</ion-label>\r\n      </ion-item>\r\n    </ion-title>\r\n    <ion-buttons slot=\"end\">      \r\n      <ion-button fill=\"clear\" color=\"danger\" [routerLink]=\"['./../../search']\">\r\n        <ion-icon name=\"search-outline\" slot=\"icon-only\"></ion-icon>\r\n      </ion-button>\r\n\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>"
+module.exports = "<ion-header fixed class=\"mainHeader\">\r\n  <ion-toolbar mode=\"md\" color=\"light\" fixed>\r\n    <ion-title *ngIf=\"!selectedAddress\">\r\n      <ion-item lines=\"none\" [routerLink]=\"['./address']\">\r\n        <ion-icon slot=\"start\" name=\"location-outline\" color=\"light\"></ion-icon>\r\n        <ion-label>{{'SELECT_ADDRESS' | translate}}</ion-label>\r\n      </ion-item>\r\n    </ion-title>\r\n    <ion-title *ngIf=\"selectedAddress?.name.length > 0\">\r\n      <ion-item lines=\"none\" [routerLink]=\"['./address']\">\r\n        <ion-icon slot=\"start\" name=\"location-outline\" color=\"light\"></ion-icon>\r\n        <ion-label>{{selectedAddress.name}}</ion-label>\r\n      </ion-item>\r\n    </ion-title>\r\n    <ion-buttons slot=\"end\">      \r\n      <ion-button fill=\"clear\" color=\"danger\" [routerLink]=\"['./../../search']\">\r\n        <ion-icon name=\"search-outline\" slot=\"icon-only\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>"
 
 /***/ }),
 
@@ -548,6 +548,10 @@ var map = {
 		"./src/app/pages/call-taxi/call-taxi.module.ts",
 		"pages-call-taxi-call-taxi-module"
 	],
+	"./pages/checkin-modal/checkin-modal.module": [
+		"./src/app/pages/checkin-modal/checkin-modal.module.ts",
+		"pages-checkin-modal-checkin-modal-module"
+	],
 	"./pages/emergency/emergency.module": [
 		"./src/app/pages/emergency/emergency.module.ts",
 		"pages-emergency-emergency-module"
@@ -567,6 +571,10 @@ var map = {
 	"./pages/map-mapbox/map-mapbox.module": [
 		"./src/app/pages/map-mapbox/map-mapbox.module.ts",
 		"pages-map-mapbox-map-mapbox-module"
+	],
+	"./pages/notifications/notifications.module": [
+		"./src/app/pages/notifications/notifications.module.ts",
+		"pages-notifications-notifications-module"
 	],
 	"./pages/pharmacy-duty/pharmacy-duty.module": [
 		"./src/app/pages/pharmacy-duty/pharmacy-duty.module.ts",
@@ -632,6 +640,8 @@ const routes = [
     { path: 'map-mapbox', loadChildren: './pages/map-mapbox/map-mapbox.module#MapMapboxPageModule' },
     { path: 'map-directions', loadChildren: './pages/map-directions/map-directions.module#MapDirectionsPageModule' },
     { path: 'product-edit', loadChildren: './pages/product-edit/product-edit.module#ProductEditPageModule' },
+    { path: 'notifications', loadChildren: './pages/notifications/notifications.module#NotificationsPageModule' },
+    { path: 'checkin-modal', loadChildren: './pages/checkin-modal/checkin-modal.module#CheckinModalPageModule' },
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -4536,11 +4546,11 @@ let User = User_1 = class User extends parse__WEBPACK_IMPORTED_MODULE_2__["User"
     set city(val) {
         this.set('city', val);
     }
-    get searchLog() {
-        return this.get('searchLog');
+    get searchData() {
+        return this.get('searchData');
     }
-    set searchLog(val) {
-        this.set('searchLog', val);
+    set searchData(val) {
+        this.set('searchData', val);
     }
     get properties() {
         return this.get('properties');

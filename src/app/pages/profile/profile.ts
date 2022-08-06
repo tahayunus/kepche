@@ -45,10 +45,9 @@ export class ProfilePage extends BasePage implements OnInit {
     private placeService: Place
   ) {
     super(injector);
-
     this.params.limit = 20;
     this.params.page = 0;
-    
+
   }
 
   enableMenuSwipe() {
@@ -94,7 +93,7 @@ export class ProfilePage extends BasePage implements OnInit {
       title: title
     });
   }
-  
+
   async getPlace() {
     this.places = await this.placeService.loadMyPlace(User.getCurrent().id);
     console.log('Benim Mekan', this.places[0]);
@@ -114,7 +113,7 @@ export class ProfilePage extends BasePage implements OnInit {
     }
     console.log('Following', this.following);
   }
-  async openFollowers(id: string,type:number){
+  async openFollowers(id: string, type: number) {
 
     await this.showLoadingView({ showOverlay: true });
 
@@ -282,6 +281,18 @@ export class ProfilePage extends BasePage implements OnInit {
     await this.dismissLoadingView();
   }
 
+  onReload(event: any = {}) {
+    this.refresher = event.target;
+    if (this.user) {
+      this.followers = [];
+      this.following = [];
+      this.photos = [];
+      this.getFollowers();
+      this.getFollowing();
+      this.loadPhotos();
+      this.params.page = 0;
+    }
+  }
   onLogout() {
     this.events.publish('user:logout')
   }

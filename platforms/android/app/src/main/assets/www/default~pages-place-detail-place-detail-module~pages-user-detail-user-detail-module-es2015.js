@@ -13643,6 +13643,9 @@ let Photo = Photo_1 = class Photo extends parse__WEBPACK_IMPORTED_MODULE_2__["Ob
     get place() {
         return this.get('place');
     }
+    get relations() {
+        return this.get('relations');
+    }
     get like() {
         return this.get('like');
     }

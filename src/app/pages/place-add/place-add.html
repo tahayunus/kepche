@@ -64,26 +64,11 @@
               <ion-item margin-vertical lines="none" color="light">
                 <ion-label></ion-label>
                 <ion-select formControlName="category" [okText]="'OK' | translate"
-                  [cancelText]="'CANCEL' | translate" (ionChange)="loadSecondCategories($event)">
+                  [cancelText]="'CANCEL' | translate">
                   <ion-select-option *ngFor="let category of categories" [value]="category">
                     <ion-label>
                       {{ category.title | translate}}
                     </ion-label>
-                  </ion-select-option>
-                </ion-select>
-              </ion-item>
-            </div>
-
-            <div class="hide-sm-up">
-              <ion-label position="stacked" color="medium">
-                <span class="bold">{{ 'SECOND_CATEGORY' | translate }} *</span>
-              </ion-label>
-              <ion-item margin-vertical lines="none" color="light">
-                <ion-label></ion-label>
-                <ion-select formControlName="secondcategory" [okText]="'OK' | translate"
-                  [cancelText]="'CANCEL' | translate">
-                  <ion-select-option *ngFor="let secondcategory of secondcategories" [value]="secondcategory">
-                    {{ secondcategory.title | translate}}
                   </ion-select-option>
                 </ion-select>
               </ion-item>

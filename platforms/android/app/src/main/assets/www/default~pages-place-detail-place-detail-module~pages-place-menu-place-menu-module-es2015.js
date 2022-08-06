@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-content class=\"ion-padding ion-fixed\">\n  <ion-grid class=\"ion-text-center\">\n    <ion-icon (click)=\"onDismiss()\" name=\"chevron-down-outline\"></ion-icon>\n  </ion-grid>\n  <ion-grid fixed>\n    <ion-label position=\"stacked\" color=\"medium\" class=\"ion-justify-content-center ion-margin-bottom\">\n      <span class=\"bold\">{{ 'PRICE' | translate }}</span>\n    </ion-label>\n    <ion-item class=\"ion-margin-vertical\" lines=\"none\" color=\"light\" class=\"ion-text-center\">\n      <ion-input type=\"number\" id=\"price\" [value]=\"price\"></ion-input>\n    </ion-item>\n\n    <ion-label position=\"stacked\" color=\"medium\" class=\"ion-justify-content-center ion-margin-bottom\">\n      <span class=\"bold\">{{ 'QUANTITY' | translate }}</span>\n    </ion-label>\n    <ion-row class=\"ion-justify-content-center\">\n      <ion-col size-xs=\"6\" size-md=\"4\">\n        <ion-buttons class=\"ion-justify-content-center\">\n          <ion-button class=\"minus\" color=\"danger\" size=\"large\" (click)=\"changeQuantity('minus')\" [disabled]=\"quantity === 0 ? true : false\">\n            <ion-icon name=\"remove-circle-outline\" color=\"dark\"></ion-icon>\n          </ion-button>\n          <ion-button class=\"number\" color=\"light\" size=\"large\">\n            <ion-label color=\"dark\">{{quantity}}</ion-label>\n          </ion-button>\n          <ion-button class=\"plus\" color=\"success\" size=\"large\" (click)=\"changeQuantity('plus')\" [disabled]=\"quantity === 10 ? true : false\">\n            <ion-icon name=\"add-circle-outline\" color=\"dark\"></ion-icon>\n          </ion-button>\n        </ion-buttons>\n      </ion-col>\n    </ion-row>\n\n    <ion-row class=\"ion-justify-content-center\">\n      <ion-col size-xs=\"6\" size-md=\"4\">\n        <ion-button class=\"ion-margin-vertical ion-strong\" (click)=\"onSubmit()\" color=\"success\" expand=\"block\"\n          shape=\"round\">\n          <span>{{ 'BROADCAST' | translate }}</span>\n        </ion-button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-content>"
+module.exports = "<ion-content class=\"ion-padding ion-fixed\">\n  <ion-grid class=\"ion-text-center\">\n    <ion-icon (click)=\"onDismiss()\" name=\"chevron-down-outline\"></ion-icon>\n  </ion-grid>\n  <ion-grid fixed>\n    <form [formGroup]=\"form\" #loginForm=\"ngForm\" (ngSubmit)=\"onSubmit()\" novalidate>\n      <ion-label position=\"stacked\" color=\"medium\" class=\"ion-justify-content-center ion-margin-bottom\">\n        <span class=\"bold\">{{ 'PRICE' | translate }}</span>\n      </ion-label>\n      <ion-item class=\"ion-margin-vertical\" lines=\"none\" color=\"light\" class=\"ion-text-center\">\n        <ion-input type=\"number\" formControlName=\"price\" [value]=\"price\"></ion-input>\n      </ion-item>\n      <ion-label position=\"stacked\" color=\"medium\" class=\"ion-justify-content-center ion-margin-bottom\">\n        <span class=\"bold\">{{ 'QUANTITY' | translate }}</span>\n      </ion-label>\n      <ion-row class=\"ion-justify-content-center\">\n        <ion-col size-xs=\"6\" size-md=\"4\">\n          <ion-buttons class=\"ion-justify-content-center\">\n            <ion-button class=\"minus\" color=\"danger\" size=\"large\" (click)=\"changeQuantity('minus')\"\n              [disabled]=\"quantity === 0 ? true : false\">\n              <ion-icon name=\"remove-circle-outline\" color=\"dark\"></ion-icon>\n            </ion-button>\n            <ion-button class=\"number\" color=\"light\" size=\"large\">\n              <ion-label color=\"dark\">{{quantity}}</ion-label>\n            </ion-button>\n            <ion-button class=\"plus\" color=\"success\" size=\"large\" (click)=\"changeQuantity('plus')\"\n              [disabled]=\"quantity === 10 ? true : false\">\n              <ion-icon name=\"add-circle-outline\" color=\"dark\"></ion-icon>\n            </ion-button>\n          </ion-buttons>\n        </ion-col>\n      </ion-row>\n\n      <ion-row class=\"ion-justify-content-center\">\n        <ion-col size-xs=\"6\" size-md=\"4\">\n          <ion-button class=\"ion-margin-vertical ion-strong\" type=\"submit\" color=\"success\" expand=\"block\" shape=\"round\">\n            <span>{{ 'BROADCAST' | translate }}</span>\n          </ion-button>\n        </ion-col>\n      </ion-row>\n    </form>\n  </ion-grid>\n</ion-content>"
 
 /***/ }),
 
@@ -18,7 +18,7 @@ module.exports = "<ion-content class=\"ion-padding ion-fixed\">\n  <ion-grid cla
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header no-border no-shadow mode=\"ios\">\r\n  <ion-toolbar color=\"danger\" fixed>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-button (click)=\"goBack()\">\r\n        <ion-icon name=\"return-up-back-outline\" slot=\"icon-only\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n    <ion-title>{{'PLACE_MENU' | translate}}</ion-title>\r\n    <ion-buttons slot=\"end\" *ngIf=\"place?.userid === user.id\">\r\n      <ion-button [routerLink]=\"['./add']\">\r\n        <ion-icon name=\"add-circle-outline\" slot=\"icon-only\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-grid fixed>\r\n    <ion-row>\r\n      <ion-col size=\"12\" *ngFor=\"let p of products\">\r\n        <ion-card mode=\"ios\" class=\"ion-no-margin\">\r\n          <ion-row>\r\n            <ion-col size=\"4\">\r\n              <ion-img class=\"bg-img\" [src]=\"p.featuredImageUrl\"></ion-img>\r\n            </ion-col>\r\n            <ion-col size=\"8\">\r\n              <ion-item lines=\"none\">\r\n                <ion-label class=\"text-normal\">{{p.title}}</ion-label>\r\n              </ion-item>\r\n              <ion-item lines=\"none\">\r\n                <ion-label class=\"bold ion-no-margin\">{{p.price}} ₺ - {{p.quantity}} porsiyon</ion-label>\r\n              </ion-item>\r\n              <ion-item lines=\"none\">\r\n                <ion-row>\r\n                  <ion-col size=\"6\">\r\n                    <ion-toggle mode=\"ios\" name=\"blueberry\" (ionChange)=\"changeStatus(p.isActive, p.id)\" [checked]=\"p.isActive ? true : false\">\r\n                    </ion-toggle>\r\n                  </ion-col>\r\n                  <ion-col size=\"6\">\r\n                    <ion-button mode=\"ios\" shape=\"round\" size=\"small\" color=\"warning\" [routerLink]=\"['./'+p.id+'/edit']\">\r\n                      <ion-label>{{'EDIT' | translate}}</ion-label>\r\n                    </ion-button>\r\n                  </ion-col>\r\n                </ion-row>\r\n              </ion-item>\r\n            </ion-col>\r\n          </ion-row>\r\n        </ion-card>\r\n      </ion-col>\r\n    </ion-row>\r\n  </ion-grid>\r\n</ion-content>"
+module.exports = "<ion-header no-border no-shadow mode=\"ios\">\r\n  <ion-toolbar color=\"danger\" fixed>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-button (click)=\"goBack()\">\r\n        <ion-icon name=\"return-up-back-outline\" slot=\"icon-only\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n    <ion-title>{{'PLACE_MENU' | translate}}</ion-title>\r\n    <ion-buttons slot=\"end\" *ngIf=\"place?.userid === user.id\">\r\n      <ion-button [routerLink]=\"['./add']\">\r\n        <ion-icon name=\"add-circle-outline\" slot=\"icon-only\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-grid fixed>\r\n    <ion-row>\r\n      <ion-col size=\"12\" *ngFor=\"let p of products\">\r\n        <ion-card mode=\"ios\" class=\"ion-no-margin\">\r\n          <ion-row>\r\n            <ion-col size=\"4\">\r\n              <ion-img class=\"bg-img\" [src]=\"p.featuredImageUrl\"></ion-img>\r\n            </ion-col>\r\n            <ion-col size=\"8\">\r\n              <ion-item lines=\"none\">\r\n                <ion-label class=\"text-normal\">{{p.title}}</ion-label>\r\n              </ion-item>\r\n              <ion-item lines=\"none\">\r\n                <ion-label class=\"bold ion-no-margin\">{{p.price}} ₺ - {{p.quantity}} porsiyon</ion-label>\r\n              </ion-item>\r\n              <ion-item lines=\"none\" *ngIf=\"p.place?.userid != userid\">\r\n                <ion-row>\r\n                  <ion-col size=\"12\">\r\n                    <ion-button mode=\"ios\" shape=\"round\" size=\"small\" color=\"warning\" expand=\"block\" (click)=\"addToCart(p.id)\">\r\n                      <ion-label>{{'ADD_TO_CART' | translate}}</ion-label>\r\n                    </ion-button>\r\n                  </ion-col>\r\n                </ion-row>\r\n              </ion-item>\r\n              <ion-item lines=\"none\" *ngIf=\"p.place?.userid === userid\">\r\n                <ion-row>\r\n                  <ion-col size=\"6\">\r\n                    <ion-toggle mode=\"ios\" name=\"blueberry\" (ionChange)=\"changeStatus(p.isActive, p.id)\" [checked]=\"p.isActive ? true : false\">\r\n                    </ion-toggle>\r\n                  </ion-col>\r\n                  <ion-col size=\"6\">\r\n                    <ion-button mode=\"ios\" shape=\"round\" size=\"small\" color=\"warning\" [routerLink]=\"['./'+p.id+'/edit']\">\r\n                      <ion-label>{{'EDIT' | translate}}</ion-label>\r\n                    </ion-button>\r\n                  </ion-col>\r\n                </ion-row>\r\n              </ion-item>\r\n            </ion-col>\r\n          </ion-row>\r\n        </ion-card>\r\n      </ion-col>\r\n    </ion-row>\r\n  </ion-grid>\r\n</ion-content>\r\n\r\n<ion-col size-xs=\"6\" size-md=\"4\">\r\n\r\n</ion-col>"
 
 /***/ }),
 
@@ -45,16 +45,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PlaceMenuModalPage", function() { return PlaceMenuModalPage; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var src_app_services_product__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/product */ "./src/app/services/product.ts");
-/* harmony import */ var _base_page_base_page__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../base-page/base-page */ "./src/app/pages/base-page/base-page.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var src_app_services_product__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/product */ "./src/app/services/product.ts");
+/* harmony import */ var _base_page_base_page__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../base-page/base-page */ "./src/app/pages/base-page/base-page.ts");
 
 
 
 
-let PlaceMenuModalPage = class PlaceMenuModalPage extends _base_page_base_page__WEBPACK_IMPORTED_MODULE_3__["BasePage"] {
+
+let PlaceMenuModalPage = class PlaceMenuModalPage extends _base_page_base_page__WEBPACK_IMPORTED_MODULE_4__["BasePage"] {
     constructor(injector, productService) {
         super(injector);
         this.productService = productService;
+        this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
+            price: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required)
+        });
     }
     ngOnInit() {
         this.getProduct();
@@ -83,12 +88,21 @@ let PlaceMenuModalPage = class PlaceMenuModalPage extends _base_page_base_page__
     }
     onSubmit() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            console.log('price', this.form.value.price);
+            console.log('quantity', this.quantity);
+            const data = new src_app_services_product__WEBPACK_IMPORTED_MODULE_3__["Product"]();
+            data.id = this.id;
+            data.set('price', this.form.value.price);
+            data.set('quantity', this.quantity);
+            data.set('isActive', true);
+            data.save();
+            this.onDismiss();
         });
     }
 };
 PlaceMenuModalPage.ctorParameters = () => [
     { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Injector"] },
-    { type: src_app_services_product__WEBPACK_IMPORTED_MODULE_2__["Product"] }
+    { type: src_app_services_product__WEBPACK_IMPORTED_MODULE_3__["Product"] }
 ];
 PlaceMenuModalPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -97,7 +111,7 @@ PlaceMenuModalPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         styles: [__webpack_require__(/*! ./place-menu-modal.page.scss */ "./src/app/pages/place-menu-modal/place-menu-modal.page.scss")]
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injector"],
-        src_app_services_product__WEBPACK_IMPORTED_MODULE_2__["Product"]])
+        src_app_services_product__WEBPACK_IMPORTED_MODULE_3__["Product"]])
 ], PlaceMenuModalPage);
 
 
@@ -156,6 +170,14 @@ let PlaceMenuPage = class PlaceMenuPage extends _base_page_base_page__WEBPACK_IM
     }
     ngOnInit() {
         this.user = src_app_services_user_service__WEBPACK_IMPORTED_MODULE_4__["User"].getCurrent();
+        this.events.subscribe('user:login', () => {
+            this.user = src_app_services_user_service__WEBPACK_IMPORTED_MODULE_4__["User"].getCurrent();
+        });
+        this.events.subscribe('user:loggedOut', () => {
+            this.user = null;
+        });
+        this.userid = this.user.id;
+        console.log('User', this.user);
         this.getProducts();
         this.getPlace();
     }

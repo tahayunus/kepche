@@ -208,12 +208,12 @@ export class User extends Parse.User {
     this.set('city', val);
   }
 
-  get searchLog(): any {
-    return this.get('searchLog');
+  get searchData(): any {
+    return this.get('searchData');
   }
 
-  set searchLog(val) {
-    this.set('searchLog', val);
+  set searchData(val) {
+    this.set('searchData', val);
   }
 
   get properties(): any {

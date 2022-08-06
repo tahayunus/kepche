@@ -326,12 +326,12 @@ var SearchPage = /** @class */ (function (_super) {
                         usr = src_app_services_user_service__WEBPACK_IMPORTED_MODULE_9__["User"].getCurrent();
                         usrId = [];
                         plcId = [];
-                        usr.searchLog.forEach(function (e) {
+                        usr.searchData.forEach(function (e) {
                             if (e.type === 'user') {
                                 usrId.push(e.id);
                             }
                         });
-                        usr.searchLog.forEach(function (e) {
+                        usr.searchData.forEach(function (e) {
                             if (e.type === 'place') {
                                 plcId.push(e.id);
                             }
@@ -516,20 +516,20 @@ var SearchPage = /** @class */ (function (_super) {
     };
     SearchPage.prototype.placeClick = function (id) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var query, searchLog;
+            var query, searchData;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         query = new src_app_services_user_service__WEBPACK_IMPORTED_MODULE_9__["User"]();
                         query.id = src_app_services_user_service__WEBPACK_IMPORTED_MODULE_9__["User"].getCurrent().id;
-                        return [4 /*yield*/, src_app_services_user_service__WEBPACK_IMPORTED_MODULE_9__["User"].getCurrent().searchLog];
+                        return [4 /*yield*/, src_app_services_user_service__WEBPACK_IMPORTED_MODULE_9__["User"].getCurrent().searchData];
                     case 1:
-                        searchLog = _a.sent();
-                        searchLog.push({
+                        searchData = _a.sent();
+                        searchData.push({
                             "id": id,
                             "type": "place"
                         });
-                        query.set("searchLog", searchLog);
+                        query.set("searchData", searchData);
                         query.save();
                         return [2 /*return*/];
                 }
@@ -538,20 +538,20 @@ var SearchPage = /** @class */ (function (_super) {
     };
     SearchPage.prototype.userClick = function (id) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var query, searchLog;
+            var query, searchData;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         query = new src_app_services_user_service__WEBPACK_IMPORTED_MODULE_9__["User"]();
                         query.id = src_app_services_user_service__WEBPACK_IMPORTED_MODULE_9__["User"].getCurrent().id;
-                        return [4 /*yield*/, src_app_services_user_service__WEBPACK_IMPORTED_MODULE_9__["User"].getCurrent().searchLog];
+                        return [4 /*yield*/, src_app_services_user_service__WEBPACK_IMPORTED_MODULE_9__["User"].getCurrent().searchData];
                     case 1:
-                        searchLog = _a.sent();
-                        searchLog.push({
+                        searchData = _a.sent();
+                        searchData.push({
                             "id": id,
                             "type": "user"
                         });
-                        query.set("searchLog", searchLog);
+                        query.set("searchData", searchData);
                         query.save();
                         return [2 /*return*/];
                 }

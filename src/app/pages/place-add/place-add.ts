@@ -104,7 +104,6 @@ export class PlaceAddPage extends BasePage {
     this.form = new FormGroup({
       name: new FormControl('', Validators.required),
       category: new FormControl(null, Validators.required),
-      secondcategory: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
       address: new FormControl(''),
       phone: new FormControl(''),
@@ -123,16 +122,6 @@ export class PlaceAddPage extends BasePage {
   async loadCategories() {
     try {
       this.categories = await this.categoryService.load();
-    } catch (error) {
-      console.warn(error.message);
-    }
-  }
-
-  async loadSecondCategories(event: any) {
-    try {
-      this.checkedcategory = event.target.value.id;
-      this.secondcategories = await this.categoryService.loadSecond(this.checkedcategory);
-      console.log('nazmi istedi', this.checkedcategory);
     } catch (error) {
       console.warn(error.message);
     }
@@ -292,14 +281,12 @@ export class PlaceAddPage extends BasePage {
 
     place.title = this.form.value.name;
     place.category = this.form.value.category;
-    place.secondcategory = this.form.value.secondcategory;
     place.description = this.form.value.description;
     place.address = this.form.value.address;
     place.website = this.form.value.website;
     place.phone = this.form.value.phone;
     place.image = this.mainUpload;
     place.imageThumb = this.mainUpload;
-console.log('nazmi istedi 2', place);
 
     place.images = this.uploads
       .filter(item => item.file)
@@ -336,27 +323,19 @@ console.log('nazmi istedi 2', place);
     }
 
     try {
-
       this.isSaving = true;
-
       const place = this.preparePlaceData();
-
       await place.save();
-
       this.events.publish('place:add');
-
       this.form.reset();
-
       this.isSaving = false;
-
-      const trans = await this.getTrans(['GOOD_JOB', 'PLACE_ADDED', 'OK'])
-
+      const trans = await this.getTrans(['GOOD_JOB', 'PLACE_ADDED', 'OK']);
       await Swal.fire({
         title: trans.GOOD_JOB,
         text: trans.PLACE_ADDED,
         confirmButtonText: trans.OK,
         type: 'success',
-        animation: false,
+        animation: true,
         heightAuto: false,
         customClass: {
           popup: 'fade-in'
